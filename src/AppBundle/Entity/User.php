@@ -2,7 +2,9 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\ORM\Mapping\JoinColumn;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -43,6 +45,30 @@ class User implements UserInterface
      */
     private $fullName;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Article", mappedBy="author")
+     */
+    private $articles;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="AppBundle\Entity\Role")
+     *
+     * @ORM\JoinTable(name="users_roles",
+     *     joinColumns={@JoinColumn(name="user_id", referencedColumnName="id")},
+     *     inverseJoinColumns={@JoinColumn(name="role_id", referencedColumnName="id")}
+     *     )
+     */
+    private $roles;
+
+    public function __construct()
+    {
+        $this->roles = new ArrayCollection();
+        $this->articles = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -142,7 +168,16 @@ class User implements UserInterface
      */
     public function getRoles()
     {
-        return [];
+        $stringRoles = [];
+
+        /**
+         * @var Role $role
+         */
+        foreach ($this->roles as $role) {
+            $stringRoles[] = $role->getRole();
+        }
+
+        return $stringRoles;
     }
 
     /**
@@ -176,6 +211,48 @@ class User implements UserInterface
     public function eraseCredentials()
     {
         // TODO: Implement eraseCredentials() method.
+    }
+
+    /**
+     * @param Role $roles
+     * @return User
+     */
+    public function addRole(Role $roles)
+    {
+        $this->roles[] = $roles;
+        return $this;
+    }
+
+//    public function isAuthor(Article $article)
+//    {
+//        return $article->getAuthor()->getId() === $this->getId();
+//    }
+
+    /**
+     * @return bool
+     */
+    public function isAdmin()
+    {
+        return in_array("ROLE_ADMIN", $this->getRoles());
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getArticles(): ArrayCollection
+    {
+        return $this->articles;
+    }
+
+    /**
+     * @param Article $article
+     * @return User
+     */
+    public function addPost(Article $article)
+    {
+        $this->articles[] = $article;
+
+        return $this;
     }
 }
 

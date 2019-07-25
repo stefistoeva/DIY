@@ -2,8 +2,10 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Role;
 use AppBundle\Entity\User;
 use AppBundle\Form\UserType;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -25,7 +27,12 @@ class UserController extends Controller
         if ($form->isSubmitted()) {
             $passwordHash =
                 $this->get('security.password_encoder')
-                ->encodePassword($user, $user->getPassword());
+                    ->encodePassword($user, $user->getPassword());
+
+            $roleUser = $this->getDoctrine()->getRepository(Role::class)
+                ->findOneBy(['name' => 'ROLE_USER']);
+
+            $user->addRole($roleUser);
 
             $user->setPassword($passwordHash);
 
