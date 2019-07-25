@@ -8,7 +8,7 @@
         <div class="well">
             <form name="authenticate" class="form-horizontal" action="{{ path('security_login') }}" method="post">
                 <fieldset>
-                    <legend>Login</legend>
+                    <legend>Sign In</legend>
                     <div class="form-group">
                         <label class="col-sm-4 control-label" for="user_email">Email</label>
                         <div class="col-sm-4">
@@ -25,10 +25,16 @@
                     <div class="form-group">
                         <div class="col-sm-4 col-sm-offset-4">
                             <a class="btn btn-default" href="{{ path('diy_index') }}">Cancel</a>
-                            <button type="submit" class="btn btn-primary">Login</button>
+                            <button type="submit" class="btn btn-primary">Sign In</button>
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-4">
+                            <label>Don't have an account? Don't worry!</label><br/>
+                        <a class="btn btn-primary" href="{{ path('user_register') }}">Create an account</a>
+                        </div>
+                    </div>
                 </fieldset>
             </form>
         </div>
