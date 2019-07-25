@@ -1,71 +1,63 @@
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-    <title>{% block title %}SoftUni Blog{% endblock %}</title>
-    {% block stylesheets %}
-        <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-        <link rel="stylesheet" href="{{ asset('css/bootstrap-datetimepicker.min.css') }}">
-    {% endblock %}
-    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
-</head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{% block title %}DIY Gifts{% endblock %}</title>
+{#        {% block stylesheets %}#}
+{#            <link rel="stylesheet" href="{{ asset('css/style.css') }}">#}
+{#            <link rel="stylesheet" href="{{ asset('css/bootstrap-datetimepicker.min.css') }}">#}
+{#        {% endblock %}#}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<body id="{% block body_id %}{% endblock %}">
+    <link rel="shortcut icon" href="{{ asset('favicon_gift.ico') }}">
+
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700,900' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400,700" rel="stylesheet">
+
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="{{ asset('templates/css/animate.css') }}">
+    <!-- Icomoon Icon Fonts-->
+    <link rel="stylesheet" href="{{ asset('templates/css/icomoon.css') }}">
+    <!-- Bootstrap  -->
+    <link rel="stylesheet" href="{{ asset('templates/css/bootstrap.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('templates/css/style.css') }}">
+
+    <!-- Modernizr JS -->
+    <script src="{{ asset('templates/js/modernizr-2.6.2.min.js') }}"></script>
+
+    <script src="{{ asset('templates/js/respond.min.js') }}"></script>
+
+</head>
+<body>
 
 {% block header %}
-    <header>
-        <div class="navbar navbar-default navbar-static-top" role="navigation">
-            <div class="container">
-                <div class="navbar-header">
-                    <a href="{{ path('diy_index') }}" class="navbar-brand">SOFTUNI BLOG</a>
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        {% if app.user %}
-                        <li>
-                        <a href="{{ path('user_profile') }}" class="navbar-brand">
-                        My Profile
-                        </a>
-                        </li>
-                        {#<li>#}
-                        {#<a href="{{ path('article_create') }}" class="navbar-brand">#}
-                        {#Create Article#}
-                        {#</a>#}
-                        {#</li>#}
-                        <li>
-                        <a href="{{ path('security_logout') }}" class="navbar-brand">
-                        Logout
-                        </a>
-                        </li>
-                        {% else %}
-                        <li>
-                        <a href="{{ path('user_register') }}">
-                        REGISTER
-                        </a>
-                        </li>
-                        <li>
-                        <a href="{{ path('security_login') }}">
-                        LOGIN
-                        </a>
-                        </li>
-                        {% endif %}
-                    </ul>
-                </div>
+    <header id="fh5co-header" role="banner">
+        <div class="container text-center">
+            <div id="fh5co-logo">
+                <a href="{{ path('diy_index') }}"><img style="max-width: 40%"
+                                                       src="{{ asset('templates/images/logo.png') }}"
+                                                       alt="DIY Gifts"></a>
             </div>
+            <nav>
+                <ul>
+                    <li><a href="{{ path('diy_index') }}">Home</a></li>
+                    <li><a href="work.html">Products</a></li>
+                    <li><a href="blog.html">Blog</a></li>
+                    <li><a href="{{ path('user_register') }}">Your profile</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
 {% endblock %}
 
+
 <div class="container body-container">
     {% block body %}
-        <div class="row">
-            <div id="main" class="col-sm-9">
+        <div id="fh5co-projects-feed" class="col-sm-4">
+            <div class="fh5co-project masonry-brick">
                 {% block main %}{% endblock %}
             </div>
         </div>
@@ -73,20 +65,34 @@
 </div>
 
 {% block footer %}
-    <footer>
-        <div class="container modal-footer">
-            <p>&copy; 2018 - Software University Foundation</p>
+    <footer id="fh5co-footer" role="contentinfo">
+        <div class="container-fluid">
+            <div class="footer-content">
+                <div class="copyright">
+                    <small>
+                        &copy; 2019 DIY Gifts. All Rights Reserved. <br>
+                        Created by @stefistoeva - study at
+                        <a href="https://softuni.bg/users/profile/show/stefistoeva" target="_blank">SoftUni</a>
+                    </small>
+                </div>
+                <div class="social">
+                    <a href="https://www.facebook.com/profile.php?id=100019005128962" target="_blank"><i class="icon-facebook3"></i></a>
+                    <a href="https://github.com/stefistoeva" target="_blank"><i class="icon-github"></i></a>
+                    <a href="https://www.linkedin.com/in/stefka-stoeva-0bbaa8145" target="_blank"><i class="icon-linkedin2"></i></a>
+                </div>
+            </div>
         </div>
     </footer>
 {% endblock %}
 
-{% block javascripts %}
-    <script src="{{ asset('js/jquery-3.3.1.min.js') }}"></script>
-    <script src="{{ asset('js/moment.min.js') }}"></script>
-    <script src="{{ asset('js/bootstrap.js') }}"></script>
-    <script src="{{ asset('js/bootstrap-datetimepicker.min.js') }}"></script>
-{% endblock %}
+<!-- jQuery -->
+<script src="{{ asset('templates/js/jquery.min.js') }}"></script>
+<!-- Bootstrap -->
+<script src="{{ asset('templates/js/bootstrap.min.js') }}"></script>
+<!-- masonry -->
+<script src="{{ asset('templates/js/jquery.masonry.min.js') }}"></script>
+<!-- MAIN JS -->
+<script src="{{ asset('templates/js/main.js') }}"></script>
 
 </body>
 </html>
-
