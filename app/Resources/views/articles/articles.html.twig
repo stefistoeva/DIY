@@ -1,6 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+
     {% for msg in app.session.flashbag.get('info') %}
         <div class="alert alert-success" id="info">
             {{ msg }}
@@ -16,22 +17,27 @@
         </div>
     {% endfor %}
 
-    <div class="button-added">
-        <a class="btn btn-default" href="{{ path('article_create') }}" style="align-content: center"><span>&#43;</span>Add new article</a>
-    </div>
+    {% if app.getUser() %}
+        <div class="button-added">
+            <a class="btn btn-default" href="{{ path('article_create') }}"><span>&#43;</span>Add new article</a>
+        </div>
+        <div class="button-added">
+            <a class="btn btn-default" href="{{ path('my_articles') }}">My articles</a>
+        </div>
+    {% endif %}
 
     <div class="container body-content">
         <div class="row">
-
             {% for article in articles %}
                 <div class="col-md-6">
-                    <article>
-{#                        {{ path('article_view', {id: article.id}) }}#}
-                        <a href="">
+                    <article style="margin-bottom: 20px">
+                        <a href="{{ path('article_view', {id: article.id}) }}">
                             <img src="{{ article.imageURL }}" width="400px" height="200px">
                         </a>
                         <header>
-                            <h2>{{ article.title }}</h2>
+                            <a href="{{ path('article_view', {id: article.id}) }}">
+                                <h2>{{ article.title }}</h2>
+                            </a>
                         </header>
 
                         <p>
@@ -40,23 +46,14 @@
 
                         <small>Views: {{ article.viewCount }}</small>
                         <br/>
-                        <small>Date Added: {{ article.dateAdded|date("F jS \\a\\t g:ia") }}</small>
+                        <small>Date Added: {{ article.dateAdded|date("F jS") }}</small>
                         <br/>
                         <small class="author">
-                            {{ article.author.fullName }}
+                           Author: {{ article.author.fullName }}
                         </small>
-
-                        <footer>
-                            <div class="pull-right">
-                                <a class="btn btn-default btn-xs"
-                                   href="{{ path('article_view', {id: article.id}) }}">Read more &raquo;</a>
-                            </div>
-                        </footer>
                     </article>
                 </div>
             {% endfor %}
         </div>
     </div>
-
-
 {% endblock %}

@@ -223,19 +223,6 @@ class User implements UserInterface
         return $this;
     }
 
-//    public function isAuthor(Article $article)
-//    {
-//        return $article->getAuthor()->getId() === $this->getId();
-//    }
-
-    /**
-     * @return bool
-     */
-    public function isAdmin()
-    {
-        return in_array("ROLE_ADMIN", $this->getRoles());
-    }
-
     /**
      * @return ArrayCollection
      */
@@ -253,6 +240,23 @@ class User implements UserInterface
         $this->articles[] = $article;
 
         return $this;
+    }
+
+    /**
+     * @param Article $article
+     * @return bool
+     */
+    public function isAuthor(Article $article)
+    {
+        return $article->getAuthor()->getId() === $this->getId();
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAdmin()
+    {
+        return in_array("ROLE_ADMIN", $this->getRoles());
     }
 }
 

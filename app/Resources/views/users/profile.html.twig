@@ -1,9 +1,31 @@
 {% extends 'base.html.twig' %}
 
+{% block body_id 'login' %}
+
 {% block main %}
 
-    Email: <h1>Hello {{ user.email }}</h1>
-
-    FullName: <h3>{{ user.fullName }}</h3>
-
+    <div class="container body-content span=8 offset=2">
+        <div class="well">
+            <form name="authenticate" class="form-horizontal" action="{{ path('security_login') }}" method="post">
+                <fieldset>
+                    <legend>My profile</legend>
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-4">
+                            <a class="btn btn-default" href="{{ path('diy_index') }}">My article</a>
+                            <a class="btn btn-default" href="{{ path('diy_index') }}">My article</a>
+                            <a class="btn btn-default" href="{{ path('diy_index') }}">My article</a>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="user_email"><small>Email: </small>{{ user.email }}</label>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="full_name"><small>Full name: </small>{{ user.fullName }}
+                        </label>
+                    </div>
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
+                </fieldset>
+            </form>
+        </div>
+    </div>
 {% endblock %}

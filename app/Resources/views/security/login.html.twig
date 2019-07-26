@@ -4,6 +4,21 @@
 
 {% block main %}
 
+    {% for msg in app.session.flashbag.get('info') %}
+        <div class="alert alert-success" id="info">
+            {{ msg }}
+        </div>
+    {% endfor %}
+
+    {% for msg in app.session.flashbag.get('errors') %}
+        <div class="alert alert-danger">
+            {{ msg }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endfor %}
+
     <div class="container body-content span=8 offset=2">
         <div class="well">
             <form name="authenticate" class="form-horizontal" action="{{ path('security_login') }}" method="post">

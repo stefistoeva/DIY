@@ -12,24 +12,26 @@
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700,900' rel='stylesheet' type='text/css'>
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:300,400,700" rel="stylesheet">
 
-    <!-- Animate.css -->
     <link rel="stylesheet" href="{{ asset('templates/css/animate.css') }}">
-    <!-- Icomoon Icon Fonts-->
     <link rel="stylesheet" href="{{ asset('templates/css/icomoon.css') }}">
-    <!-- Bootstrap  -->
     <link rel="stylesheet" href="{{ asset('templates/css/bootstrap.css') }}">
-
     <link rel="stylesheet" href="{{ asset('templates/css/style.css') }}">
-    <!-- Modernizr JS -->
+
     <script src="{{ asset('templates/js/modernizr-2.6.2.min.js') }}"></script>
     <script src="{{ asset('templates/js/respond.min.js') }}"></script>
     <script src="{{ asset('templates/js/jquery.min.js') }}"></script>
     <script src="{{ asset('templates/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('templates/js/jquery.masonry.min.js') }}"></script>
     <script src="{{ asset('templates/js/main.js') }}"></script>
+
+    <script>
+        setTimeout(function () {
+            $('#info').fadeOut();
+        }, 3500)
+    </script>
 </head>
 <body>
-
+{#style="background-color: #fcfcfc"#}
 {% block header %}
     <header id="fh5co-header" role="banner">
         <div class="container text-center">
@@ -45,11 +47,11 @@
                     <li><a href="{{ path('all_articles') }}">Blog</a></li>
                     <li><a href="contact.html">About</a></li>
                     {% if app.user %}
-                    <li><a href="{{ path('user_profile') }}">My profile</a></li>
-                    <li><a href="{{ path('security_logout') }}">Logout</a></li>
+                        <li><a href="{{ path('user_profile') }}">My profile</a></li>
+                        <li><a href="{{ path('security_logout') }}">Logout</a></li>
                     {% else %}
-                    <li><a href="{{ path('security_login') }}">Sign In</a></li>
-                    <li><a href="{{ path('user_register') }}">Register</a></li>
+                        <li><a href="{{ path('security_login') }}">Sign In</a></li>
+                        <li><a href="{{ path('user_register') }}">Register</a></li>
                     {% endif %}
                 </ul>
             </nav>
@@ -80,9 +82,11 @@
                     </small>
                 </div>
                 <div class="social">
-                    <a href="https://www.facebook.com/profile.php?id=100019005128962" target="_blank"><i class="icon-facebook3"></i></a>
+                    <a href="https://www.facebook.com/profile.php?id=100019005128962" target="_blank"><i
+                                class="icon-facebook3"></i></a>
                     <a href="https://github.com/stefistoeva" target="_blank"><i class="icon-github"></i></a>
-                    <a href="https://www.linkedin.com/in/stefka-stoeva-0bbaa8145" target="_blank"><i class="icon-linkedin2"></i></a>
+                    <a href="https://www.linkedin.com/in/stefka-stoeva-0bbaa8145" target="_blank"><i
+                                class="icon-linkedin2"></i></a>
                 </div>
             </div>
         </div>

@@ -6,6 +6,20 @@
         <div class="row">
             <div class="col-md-12">
                 <article>
+
+
+{#                    <div class="page-content">#}
+{#                        <h1 class="mb0">Your Project Title Here</h1>#}
+{#                        <div class="meta"><span><a href="#">Packaging</a>, <a href="#">Illustration</a></span></div>#}
+{#                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Repellendus quaerat nostrum, neque cum, quidem inventore consequatur sunt optio sint! Veritatis maiores recusandae dolores nihil cumque, eaque eius obcaecati voluptatum necessitatibus.</p>#}
+{#                        <p><img src="images/img_large_1.jpg" alt="Free HTML5 by FreeHTML5.co"></p>#}
+{#                        <p><img src="images/img_large_2.jpg" alt="Free HTML5 by FreeHTML5.co"></p>#}
+{#                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi saepe officia, consectetur praesentium minus reiciendis, accusamus consequuntur iusto ad illum quibusdam commodi facere tenetur. Culpa quia laborum quam, sint laboriosam delectus veniam, at molestiae magnam iusto similique dolorem ea doloremque!</p>#}
+{#                        <p><img src="images/img_large_3.jpg" alt="Free HTML5 by FreeHTML5.co"></p>#}
+{#                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quasi saepe officia, consectetur praesentium minus reiciendis, accusamus consequuntur iusto ad illum quibusdam commodi facere tenetur. Culpa quia laborum quam, sint laboriosam delectus veniam, at molestiae magnam iusto similique dolorem ea doloremque!</p>#}
+{#                        <p>Ullam recusandae error odit eveniet soluta temporibus quis mollitia dignissimos quasi, magni culpa sed, minima atque quae a vitae dolores, illo cum sint! Quaerat rem incidunt nihil laborum nulla placeat soluta, fugit dolor aperiam facere itaque laboriosam error ratione praesentium.</p>#}
+{#                    </div>#}
+
                     <a href="{{ path('article_view', {id: article.id}) }}">
                         <img src="{{ article.imageURL }}" width="400px" height="200px">
                     </a>
@@ -23,10 +37,12 @@
 
                     <footer>
                         <div class="pull-right">
-{#                            {% if app.getUser() and (app.getUser().isAuthor(article) or app.getUser().isAdmin()) %}#}
-                                <a class="btn btn-success btn-xs" href="{{ path('article_edit', {id: article.id}) }}">Edit &raquo;</a>
-                                <a class="btn btn-danger btn-xs" href="{{ path('article_delete', {id: article.id}) }}">Delete &raquo;</a>
-{#                            {% endif %}#}
+                            {% if app.getUser() and (app.getUser().isAuthor(article) or app.getUser().isAdmin()) %}
+                                <a class="btn btn-success btn-xs" href="{{ path('article_edit', {id: article.id}) }}">Edit
+                                    &raquo;</a>
+                                <a class="btn btn-danger btn-xs" href="{{ path('article_delete', {id: article.id}) }}">Delete
+                                    &raquo;</a>
+                            {% endif %}
                             <a class="btn btn-default btn-xs" href="{{ path('all_articles') }}">back &raquo;</a>
                         </div>
                     </footer>
@@ -34,5 +50,33 @@
             </div>
         </div>
     </div>
+
+    {% if  app.getUser() %}
+        <div class="container body-content span=2 offset=2">
+            <div class="well">
+                <form class="form-horizontal" action="{{ path('user_register') }}" method="post">
+                    <fieldset>
+                        <legend>Add comment</legend>
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label" for="comment">Comment:</label>
+                            <div class="col-sm-6">
+                            <textarea placeholder="Leave a comment..." class="form-control" rows="3"
+                                      name="article[content]" id="comment">
+                            </textarea>
+                                <small>User: {{ app.getUser().getFullName() }}</small>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-4">
+                                <button type="submit" name="Submit" class="btn btn-primary">Send</button>
+                            </div>
+                        </div>
+                        {#{{ form_row(form._token) }}#}
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    {% endif %}
+
 
 {% endblock %}
