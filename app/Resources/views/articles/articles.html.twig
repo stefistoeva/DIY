@@ -25,7 +25,6 @@
             <a class="btn btn-default" href="{{ path('my_articles') }}">My articles</a>
         </div>
     {% endif %}
-
     <div class="container body-content">
         <div class="row">
             {% for article in articles %}
@@ -49,7 +48,7 @@
                         <small>Date Added: {{ article.dateAdded|date("F jS") }}</small>
                         <br/>
                         <small class="author">
-                           Author: {{ article.author.fullName }}
+                            Author: {{ article.author.fullName }}
                         </small>
                     </article>
                 </div>

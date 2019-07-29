@@ -23,7 +23,6 @@
     <script src="{{ asset('templates/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('templates/js/jquery.masonry.min.js') }}"></script>
     <script src="{{ asset('templates/js/main.js') }}"></script>
-
     <script>
         setTimeout(function () {
             $('#info').fadeOut();
@@ -43,7 +42,7 @@
             <nav>
                 <ul>
                     <li><a href="{{ path('diy_index') }}">Home</a></li>
-                    <li><a href="">Products</a></li>
+                    <li><a href="{{ path('all_products') }}">Products</a></li>
                     <li><a href="{{ path('all_articles') }}">Blog</a></li>
                     <li><a href="contact.html">About</a></li>
                     {% if app.user %}
