@@ -9,7 +9,7 @@
                     <div class="page-content">
                         <h1 class="mb0">{{ article.title }}</h1>
                         <div class="meta"><span><a href="{{ path('all_articles') }}">Back to blog</a></span></div>
-                        <p><img src="{{ article.imageURL }}" alt="Article image"></p>
+                        <p><img src="{{ asset('uploads/images/articles/' ~ article.image) }}" alt="Article image"></p>
                         <p>
                             {{ article.content }}
                         </p>

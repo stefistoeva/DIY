@@ -31,7 +31,7 @@
                 <div class="col-md-6">
                     <article style="margin-bottom: 20px">
                         <a href="{{ path('article_view', {id: article.id}) }}">
-                            <img src="{{ article.imageURL }}" width="400px" height="200px">
+                            <img src="{{ asset('uploads/images/articles/' ~ article.image) }}" width="400px" height="200px">
                         </a>
                         <header>
                             <a href="{{ path('article_view', {id: article.id}) }}">

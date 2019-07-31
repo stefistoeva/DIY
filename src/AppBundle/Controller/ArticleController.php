@@ -8,6 +8,9 @@ use AppBundle\Form\ArticleType;
 use AppBundle\Service\Articles\ArticleServiceInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -52,6 +55,8 @@ class ArticleController extends Controller
         $article = new Article();
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
+        $this->fileUpload($form, $article);
+
         $this->articleService->create($article);
 
         $this->addFlash("info", "Create article successfully!");
@@ -78,7 +83,8 @@ class ArticleController extends Controller
 
         return $this->render("articles/edit.html.twig",
             [
-                'form' => $this->createForm(ArticleType::class),
+                'form' => $this->createForm(ArticleType::class)
+                    ->createView(),
                 'article' => $article
             ]);
     }
@@ -93,9 +99,9 @@ class ArticleController extends Controller
     public function editProcess(Request $request, $id)
     {
         $article = $this->articleService->getOne($id);
-
         $form = $this->createForm(ArticleType::class, $article);
         $form->handleRequest($request);
+        $this->fileUpload($form, $article);
         $this->articleService->edit($article);
 
         return $this->redirectToRoute("all_articles");
@@ -139,7 +145,7 @@ class ArticleController extends Controller
 
         $form = $this->createForm(ArticleType::class, $article);
 
-        $form->remove('imageURL');
+        $form->remove('image');
 
         $form->handleRequest($request);
         $this->articleService->delete($article);
@@ -222,5 +228,25 @@ class ArticleController extends Controller
                 'articles' => $articles
             ]
         );
+    }
+
+    /**
+     * @param FormInterface $form
+     * @param Article $article
+     */
+    private function fileUpload(FormInterface $form, Article $article)
+    {
+        /** @var UploadedFile $file */
+        $file = $form['image']->getData();
+        $fileName = md5(uniqid()) . '.' . $file->guessExtension();
+
+        if ($file) {
+            $file->move(
+                $this->getParameter('articles_directory'),
+                $fileName
+            );
+
+            $article->setImage($fileName);
+        }
     }
 }

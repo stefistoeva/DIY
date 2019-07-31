@@ -58,9 +58,9 @@ class Article
     /**
      * @var string
      *
-     * @ORM\Column(name="image_url", type="text")
+     * @ORM\Column(name="image", type="string", length=255)
      */
-    private $imageURL;
+    private $image;
 
     /**
      * @var int
@@ -214,16 +214,16 @@ class Article
     /**
      * @return string
      */
-    public function getImageURL()
+    public function getImage()
     {
-        return $this->imageURL;
+        return $this->image;
     }
 
     /**
-     * @param string $imageURL
+     * @param string $image
      */
-    public function setImageURL(string $imageURL)
+    public function setImage(string $image)
     {
-        $this->imageURL = $imageURL;
+        $this->image = $image;
     }
 }
