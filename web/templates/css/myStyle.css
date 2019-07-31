@@ -1,0 +1,73 @@
+hr {
+    width: 50px;
+    margin: 20px auto;
+    height: 3px;
+    border: none;
+}
+
+nav ul li {
+    display: inline-block;
+    list-style: none;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #D67472;
+    margin-right: 20px;
+    font-weight: bold;
+}
+
+.first-section {
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.1)), url('../images/banner2.jpg') no-repeat center center;
+    background-size: cover;
+    color: white;
+    text-align: center;
+}
+
+.first-section h1 {
+    padding-top: 290px;
+    font-size: 30px;
+}
+
+.first-section-text {
+    transform: rotate(-4deg);
+    margin: 0 auto;
+    padding-left: 3%;
+    width: 60%;
+}
+
+.first-section p {
+    padding-bottom: 200px;
+    width: 60%;
+    margin: 0 auto;
+    font-size: 17px;
+    color: black;
+}
+
+.third-section hr,
+.first-section hr {
+    background: #d26563;
+}
+
+.third-section {
+    text-align: center;
+}
+
+.third-section h2 {
+    padding-top: 50px;
+}
+
+.third-section img {
+    widows: 100px;
+    height: 100px;
+}
+
+.third-section li {
+    list-style: none;
+    display: inline-block;
+    width: 20%;
+}
+
+.third-section li:not(:last-child) {
+    margin-right: 40px;
+}
