@@ -9,26 +9,28 @@
                 <hr>
                 <p>DIY can be applied to different things. You can read on our blog and add your articles. If you don't
                     have time or motivation for creations, don't worry. We offer our DIY products for everyone.</p>
+                <form method="get" action="{{ path('all_products') }}">
+                    <button>Gifts</button>
+                </form>
             </div>
         </section>
+
         <section class="third-section">
-            <h2>HOW WE WORK</h2>
+            <h2>WHAT WE USE</h2>
             <hr>
             <ul>
                 <li>
-                    <img src="" alt="calendar">
-                    <h4>DESIGN</h4>
-                    <p>Your personal design consultant meets with you to discuss style, prederences and space.</p>
+                    <h4>CREATIONS</h4>
+                    <p>"Learning is a new skill. Imagination, creation and asking new questions are at its core."</p>
                 </li>
                 <li>
-                    <img src="" alt="">
-                    <h4>LOVE</h4>
-                    <p>Keep love in your heart. A life without it is like a sunless garden when the flowers are dead.</p>
-                </li>
-                <li>
-                    <img src="../{{ asset('templates/images/Face-smile.png') }}" alt="smile">
                     <h4>SMILE</h4>
-                    <p>Share your smile with the world. It's a symbol of friendship and peace.</p>
+                    <p>"Share your smile with the world. It's a symbol of friendship and peace."</p>
+                </li>
+                <li>
+                    <h4>LOVE</h4>
+                    <p>"Keep love in your heart. A life without it is like a sunless garden when the flowers are
+                        dead."</p>
                 </li>
             </ul>
         </section>

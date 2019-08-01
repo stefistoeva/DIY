@@ -3,6 +3,7 @@ hr {
     margin: 20px auto;
     height: 3px;
     border: none;
+    background: #d26563;
 }
 
 nav ul li {
@@ -37,20 +38,31 @@ nav ul li a {
 }
 
 .first-section p {
-    padding-bottom: 200px;
+    padding-bottom: 20px;
     width: 60%;
     margin: 0 auto;
     font-size: 17px;
     color: black;
 }
 
-.third-section hr,
-.first-section hr {
-    background: #d26563;
+.first-section button {
+    margin-bottom: 140px;
+    margin-top: 20px;
+    padding: 5px 10px;
+    background: transparent;
+    color: black;
+    font-size: 22px;
+    border: 2px solid;
+    border-color: #d26563;
+    border-radius: 10px;
 }
 
 .third-section {
     text-align: center;
+}
+
+.third-section ul {
+    padding-inline-start: 0px;
 }
 
 .third-section h2 {
@@ -58,8 +70,9 @@ nav ul li a {
 }
 
 .third-section img {
-    widows: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
+    padding-bottom: 5px;
 }
 
 .third-section li {
