@@ -26,7 +26,9 @@ nav ul li a {
 }
 
 .first-section h1 {
-    padding-top: 290px;
+    /*padding-top: 290px;*/
+    padding-top: 325px;
+
     font-size: 30px;
 }
 
@@ -46,8 +48,10 @@ nav ul li a {
 }
 
 .first-section button {
-    margin-bottom: 140px;
-    margin-top: 20px;
+    /*margin-bottom: 140px;*/
+    /*margin-top: 20px;*/
+    margin-bottom: 172px;
+    margin-top: 0px;
     padding: 5px 10px;
     background: transparent;
     color: black;

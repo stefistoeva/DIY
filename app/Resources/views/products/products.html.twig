@@ -1,54 +1,49 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {#    {% for msg in app.session.flashbag.get('info')  %}#}
-    {#        <div class="alert alert-success" id="info">#}
-    {#            {{ msg }}#}
-    {#        </div>#}
-    {#    {% endfor %}#}
+        {% for msg in app.session.flashbag.get('info')  %}
+            <div class="alert alert-success" id="info">
+                {{ msg }}
+            </div>
+        {% endfor %}
 
-    {#    {% for msg in app.session.flashbag.get('errors')  %}#}
-    {#        <div class="alert alert-danger">#}
-    {#            {{ msg }}#}
-    {#            <button type="button" class="close" data-dismiss="alert" aria-label="Close">#}
-    {#                <span aria-hidden="true">&times;</span>#}
-    {#            </button>#}
-    {#        </div>#}
-    {#    {% endfor %}#}
+        {% for msg in app.session.flashbag.get('errors')  %}
+            <div class="alert alert-danger">
+                {{ msg }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        {% endfor %}
 
+    {% if app.getUser() and app.getUser().isAdmin() %}
+        <div class="button-added">
+            <a class="btn btn-default" href="{{ path('product_add') }}"><span>&#43;</span>Add new gift</a>
+        </div>
+{#        <div class="button-added">#}
+{#            <a class="btn btn-default" href="{{ path('my_articles') }}">My gifts</a>#}
+{#        </div>#}
+    {% endif %}
 
     <div class="row">
         <div class="col-sm-4">
             <div class="card">
                 <div class="card-body">
-                    <img src="https://images.unsplash.com/photo-1490918686724-6b23c27c03d1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80" style="margin-bottom: 10px" width="300px" height="200px" class="card-img" alt="...">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+{#                    {{ path('article_view', {id: article.id}) }}#}
+                    <a href="">
+{#                        {{ asset('uploads/images/products/' ~ product.image) }}#}
+                        <img src=""
+{#                                {{ product.name }}#}
+                             style="margin-bottom: 10px" width="300px" height="200px" class="card-img" alt="">
+                    </a>
+{#                    {{ product.name }}#}
+                    <h5 class="card-title"></h5>
+{#                    {{ product.partOfDesc }}#}
+                    <p class="card-text"></p>
                     <a href="#" class="btn btn-primary">Buy</a>
                 </div>
             </div>
         </div>
-        <div class="col-sm-4">
-            <div class="card">
-                <div class="card-body">
-                    <img src="https://images.unsplash.com/photo-1490918686724-6b23c27c03d1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80" style="margin-bottom: 10px" width="300px" height="200px" class="card-img" alt="...">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary">Buy</a>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="card">
-                <div class="card-body">
-                    <img src="https://images.unsplash.com/photo-1490918686724-6b23c27c03d1?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&w=1000&q=80" style="margin-bottom: 10px" width="300px" height="200px" class="card-img" alt="...">
-                    <h5 class="card-title">Special title treatment</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" class="btn btn-primary">Buy</a>
-                </div>
-            </div>
-        </div>
-
     </div>
 
 {% endblock %}

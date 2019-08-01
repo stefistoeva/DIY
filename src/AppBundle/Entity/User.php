@@ -64,10 +64,20 @@ class User implements UserInterface
      */
     private $roles;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Product", mappedBy="author")
+     *
+     * @ORM\JoinColumn(name="authorId", referencedColumnName="id")
+     */
+    private $products;
+
     public function __construct()
     {
         $this->roles = new ArrayCollection();
         $this->articles = new ArrayCollection();
+        $this->products = new ArrayCollection();
     }
 
     /**
@@ -258,5 +268,26 @@ class User implements UserInterface
     {
         return in_array("ROLE_ADMIN", $this->getRoles());
     }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getProducts()
+    {
+        return $this->products;
+    }
+
+    /**
+     * @param Product $product
+     * @return User
+     */
+    public function addProduct(Product $product)
+    {
+        $this->products[] = $product;
+
+        return $this;
+    }
+
+
 }
 

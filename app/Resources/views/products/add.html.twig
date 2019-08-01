@@ -1,0 +1,66 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container body-content span=8 offset=2">
+        <div class="well">
+            <form class="form-horizontal" enctype="multipart/form-data" action="{{ path('product_add') }}"
+                  method="POST">
+                <fieldset>
+                    <legend>Add new gift</legend>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="product_name">Name</label>
+                        <div class="col-sm-4 ">
+                            <input type="text" class="form-control" id="product_name" placeholder="Product name..."
+                                   name="product[name]">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="product_description">Description</label>
+                        <div class="col-sm-6">
+                        <textarea class="form-control" rows="6" id="product_description"
+                                  placeholder="Product description..."
+                                  name="product[description]"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="product_price">Price</label>
+                        <div class="col-sm-6">
+                            <input type="number" required name="price" min="0" value="0" step=".01">
+                            {#<textarea class="form-control" rows="6" id="product_price"#}
+                            {#name="product[price]"></textarea>#}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="product_image">Upload Image</label>
+                        <div class="col-sm-6">
+                            <input accept=".jpg, .jpeg, .png" type="file" class="form-control" id="product_image"
+                                   placeholder="Upload Image"
+                                   name="product[image]">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label"></label>
+                        <div class="col-sm-6">
+                            <input type="checkbox" name="promotion" value="Promotion"> Promotion <small>(add 10% discount)</small><br>
+                        </div>
+                    </div>
+
+{#                    {{ form_row(form._token) }}#}
+
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-4">
+                            <a class="btn btn-default" href="{{ path('all_articles') }}">Cancel</a>
+                            <button type="submit" class="btn btn-primary">Create</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
