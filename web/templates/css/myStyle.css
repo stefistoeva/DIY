@@ -26,10 +26,26 @@ nav ul li a {
 }
 
 .first-section h1 {
-    /*padding-top: 290px;*/
     padding-top: 325px;
-
     font-size: 30px;
+}
+
+@media only screen and (max-width: 748px) {
+    .first-section h1 {
+        padding-top: 375px !important;
+    }
+    .first-section button {
+        margin-bottom: 185px !important;
+    }
+}
+
+@media only screen and (max-width: 587px) {
+    .first-section h1 {
+        padding-top: 440px !important;
+    }
+    .first-section button {
+        margin-bottom: 230px !important;
+    }
 }
 
 .first-section-text {
