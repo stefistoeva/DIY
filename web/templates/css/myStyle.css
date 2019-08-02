@@ -104,3 +104,67 @@ nav ul li a {
 .third-section li:not(:last-child) {
     margin-right: 40px;
 }
+
+
+
+/*view one product*/
+
+.product-description {
+    border-bottom: 1px solid #E1E8EE;
+    margin-bottom: 7px;
+}
+
+.product-description span {
+    font-size: 12px;
+    color: #358ED7;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+.product-description h1 {
+    font-weight: 300;
+    font-size: 52px;
+    color: #43484D;
+    letter-spacing: -2px;
+}
+.product-description p {
+    font-size: 16px;
+    font-weight: 300;
+    color: #86939E;
+    line-height: 24px;
+}
+
+.product-price {
+    display: flex;
+    align-items: center;
+}
+
+.product-price a {
+    display: flex;
+    align-items: center;
+    margin: 2px;
+}
+
+.product-price span {
+    font-size: 26px;
+    font-weight: 300;
+    color: #43474D;
+    margin-right: 20px;
+}
+
+.post-container {
+    margin: 20px;
+    overflow: auto
+}
+
+.post-thumb img {
+    float: left;
+    padding-right: 10px;
+    display: block;
+    width: 500px;
+    height: 300px;
+}
+
+.post-content {
+    padding-left: 555px;
+}

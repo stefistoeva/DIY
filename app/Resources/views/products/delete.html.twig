@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container body-content span=8 offset=2">
+        <div class="well">
+            <form class="form-horizontal" enctype="multipart/form-data" action="{{ path('product_delete', {id: product.id}) }}" method="POST">
+                <fieldset>
+                    <legend>Delete gift</legend>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="product_name">Name</label>
+                        <div class="col-sm-4 ">
+                            <input type="text" class="form-control"  id="product_name" placeholder="Product name..."
+                                   name="product[name]" value="{{ product.name }}" disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="product_description">Description</label>
+                        <div class="col-sm-6">
+                        <textarea class="form-control" rows="6" id="product_description"
+                                  placeholder="Product description..."
+                                  name="product[description]" disabled>{{ product.description }}</textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="product_price">Price</label>
+                        <div class="col-sm-6">
+                            <input type="number" name="product[price]" min="0" step=".01" value="{{ product.price }}" disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="product_image">Upload Image</label>
+                        <div class="col-sm-6">
+                            <input type="text" class="form-control"  id="product_image" placeholder="picture.jpg"
+                                   name="product[image]" disabled>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label"></label>
+                        <div class="col-sm-6">
+                            <input type="hidden" name="product[promotion]" value="0" />
+                            {% if (product.promotion) %}
+                                <input type="checkbox" name="product[promotion]" value="1" checked disabled> Promotion <small>(add 10% discount)</small><br>
+                            {% else %}
+                                <input type="checkbox" name="product[promotion]" value="1" disabled> Promotion <small>(add 10% discount)</small><br>
+                            {% endif %}
+                        </div>
+                    </div>
+
+{#                    {{ form_row(form._token) }}#}
+
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-4">
+                            <a class="btn btn-default" href="{{ path('product_view', {id: product.id}) }}">Cancel</a>
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+

@@ -62,6 +62,11 @@ class Product
     private $promotion;
 
     /**
+     * @var float
+     */
+    private $discount;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="dateAdded", type="datetime")
@@ -170,8 +175,9 @@ class Product
 
     public function setPartOfDesc()
     {
-        $textForShow = substr($this->getDescription(),0, 70);
-        if (strlen($this->getDescription() > 70)) {
+        $textForShow = substr($this->getDescription(),0, 35);
+
+        if (35 < strlen($this->getDescription())) {
             $textForShow .= "...";
         }
         $this->partOfDesc = $textForShow;
@@ -250,11 +256,6 @@ class Product
      */
     public function setPromotion($promotion)
     {
-        if ($promotion) {
-            $discount = $this->getPrice() * 0.90;
-            $this->setPrice($discount);
-        }
-
         $this->promotion = $promotion;
 
         return $this;
@@ -268,5 +269,22 @@ class Product
     public function getPromotion()
     {
         return $this->promotion;
+    }
+
+    /**
+     * @return float
+     */
+    public function getDiscount()
+    {
+        if (null === $this->discount) {
+            $this->setDiscount();
+        }
+        return $this->discount;
+    }
+
+    public function setDiscount()
+    {
+        $discount = number_format($this->getPrice() * 0.90, 2, '.', '');
+        $this->discount = $discount;
     }
 }

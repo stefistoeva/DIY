@@ -3,37 +3,36 @@
 {% block body %}
     <div class="container body-content span=8 offset=2">
         <div class="well">
-            <form class="form-horizontal" enctype="multipart/form-data" action="{{ path('product_add') }}"
-                  method="POST">
+            <form class="form-horizontal" enctype="multipart/form-data" action="{{ path('product_edit', {id: product.id}) }}" method="POST">
                 <fieldset>
-                    <legend>Add new gift</legend>
+                    <legend>Edit gift</legend>
 
                     <div class="form-group">
-                        <label class="col-sm-4 control-label" for="product_name">Name <span class="required">*</span></label>
+                        <label class="col-sm-4 control-label" for="product_name">Name</label>
                         <div class="col-sm-4 ">
-                            <input type="text" class="form-control" required="required" id="product_name" placeholder="Product name..."
-                                   name="product[name]">
+                            <input type="text" class="form-control" id="product_name" placeholder="Product name..."
+                                   name="product[name]" value="{{ product.name }}">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-4 control-label" for="product_description">Description <span class="required">*</span></label>
+                        <label class="col-sm-4 control-label" for="product_description">Description</label>
                         <div class="col-sm-6">
-                        <textarea class="form-control" rows="6" required id="product_description"
+                        <textarea class="form-control" rows="6" id="product_description"
                                   placeholder="Product description..."
-                                  name="product[description]"></textarea>
+                                  name="product[description]">{{ product.description }}</textarea>
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-4 control-label" for="product_price">Price <span class="required">*</span></label>
+                        <label class="col-sm-4 control-label" for="product_price">Price</label>
                         <div class="col-sm-6">
-                            <input type="number" required name="product[price]" min="0" step=".01">
+                            <input type="number" name="product[price]" min="0" step=".01" value="{{ product.price }}">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-4 control-label" for="product_image">Upload Image <span class="required">*</span></label>
+                        <label class="col-sm-4 control-label" for="product_image">Upload Image</label>
                         <div class="col-sm-6">
                             <input accept=".jpg, .jpeg, .png" type="file" required class="form-control" id="product_image"
                                    placeholder="Upload Image"
@@ -45,7 +44,11 @@
                         <label class="col-sm-4 control-label"></label>
                         <div class="col-sm-6">
                             <input type="hidden" name="product[promotion]" value="0" />
+                            {% if (product.promotion) %}
+                            <input type="checkbox" name="product[promotion]" value="1" checked> Promotion <small>(add 10% discount)</small><br>
+                            {% else %}
                             <input type="checkbox" name="product[promotion]" value="1"> Promotion <small>(add 10% discount)</small><br>
+                            {% endif %}
                         </div>
                     </div>
 
@@ -53,8 +56,8 @@
 
                     <div class="form-group">
                         <div class="col-sm-4 col-sm-offset-4">
-                            <a class="btn btn-default" href="{{ path('all_products') }}">Cancel</a>
-                            <button type="submit" class="btn btn-primary">Create</button>
+                            <a class="btn btn-default" href="{{ path('product_view', {id: product.id}) }}">Cancel</a>
+                            <button type="submit" class="btn btn-success">Edit</button>
                         </div>
                     </div>
                 </fieldset>

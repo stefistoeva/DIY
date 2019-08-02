@@ -1,30 +1,6 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-    {% for msg in app.session.flashbag.get('info') %}
-        <div class="alert alert-success" id="info">
-            {{ msg }}
-        </div>
-    {% endfor %}
-
-    {% for msg in app.session.flashbag.get('errors') %}
-        <div class="alert alert-danger">
-            {{ msg }}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-    {% endfor %}
-
-    {% if app.getUser() and app.getUser().isAdmin() %}
-        <div class="button-added">
-            <a class="btn btn-default" href="{{ path('product_add') }}"><span>&#43;</span>Add new gift</a>
-        </div>
-        <div class="button-added">
-            <a class="btn btn-default" href="{{ path('my_products') }}">My gifts</a>
-        </div>
-    {% endif %}
-
     <div class="row">
         {% for product in products %}
             <div class="col-sm-4">
@@ -45,12 +21,14 @@
                             <h5 class="card-price">${{ product.price }}</h5>
                         {% endif %}
                         <a href="{{ path('product_view', {id: product.id}) }}" class="btn btn-primary">View</a>
-                        <a href="#" class="btn btn-primary">Buy</a>
+                        {% if app.getUser() and app.getUser().isAdmin() %}
+                            <a class="btn btn-default" href="{{ path('product_edit', {id: product.id}) }}">Edit</a>
+                            <a class="btn btn-danger" href="{{ path('product_delete', {id: product.id}) }}">Delete</a>
+                        {% endif %}
                     </div>
                 </div>
             </div>
         {% endfor %}
     </div>
-
 {% endblock %}
 

@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="post-container">
+        <div class="post-thumb">
+            <img src="{{ asset('uploads/images/products/' ~ product.image) }}" alt="{{ product.name }}"/>
+        </div>
+        <div class="post-content">
+            <div class="product-description">
+                <span>DIY Gifts</span>
+                <h1>{{ product.name }}</h1>
+                <p>{{ product.description }}</p>
+            </div>
+            <div class="product-price">
+                {% if product.promotion %}
+                    <span style="text-decoration: line-through">${{ product.price }}</span>
+                    <span style="color: red">${{ product.discount }}</span>
+                {% else %}
+                    <span>${{ product.price }}</span>
+                {% endif %}
+                <a href="#" class="btn btn-primary">Add to cart</a>
+                {% if app.getUser() and app.getUser().isAdmin() %}
+                    <a class="btn btn-success" href="{{ path('product_edit', {id: product.id}) }}">Edit</a>
+                    <a class="btn btn-danger" href="{{ path('product_delete', {id: product.id}) }}">Delete</a>
+                {% endif %}
+                <a class="btn btn-default" href="{{ path('all_products') }}">Back</a>
+        </div>
+        </div>
+    </div>
+{% endblock %}
+

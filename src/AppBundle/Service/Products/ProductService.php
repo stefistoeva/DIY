@@ -8,6 +8,7 @@ use AppBundle\Entity\Product;
 use AppBundle\Repository\ProductRepository;
 use AppBundle\Service\Users\UserServiceInterface;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\ORMException;
 
 class ProductService implements ProductServiceInterface
 {
@@ -38,7 +39,7 @@ class ProductService implements ProductServiceInterface
     /**
      * @param Product $product
      * @return bool
-     * @throws \Doctrine\ORM\ORMException
+     * @throws ORMException
      */
     public function create(Product $product): bool
     {
@@ -51,7 +52,7 @@ class ProductService implements ProductServiceInterface
     /**
      * @param Product $product
      * @return bool
-     * @throws \Doctrine\ORM\ORMException
+     * @throws ORMException
      */
     public function edit(Product $product): bool
     {
@@ -61,7 +62,7 @@ class ProductService implements ProductServiceInterface
     /**
      * @param Product $product
      * @return bool
-     * @throws \Doctrine\ORM\ORMException
+     * @throws ORMException
      */
     public function delete(Product $product): bool
     {

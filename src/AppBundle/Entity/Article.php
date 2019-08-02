@@ -172,7 +172,6 @@ class Article
      */
     public function setSummary()
     {
-        //strlen($this->getContent()) / 2
         $this->summary = substr($this->getContent(), 0, 30) . "...";
     }
 

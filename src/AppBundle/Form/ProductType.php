@@ -20,7 +20,10 @@ class ProductType extends AbstractType
             ->add('name', TextType::class)
             ->add('description', TextType::class)
             ->add('price', NumberType::class)
-            ->add('image', FileType::class)
+            ->add('image', FileType::class,
+                [
+                    'data_class' => null
+                ])
             ->add('promotion', TextType::class);
     }
 
