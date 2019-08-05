@@ -3,6 +3,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Article;
+use AppBundle\Entity\Message;
 use AppBundle\Entity\User;
 use AppBundle\Form\ArticleType;
 use AppBundle\Service\Articles\ArticleServiceInterface;
@@ -169,7 +170,16 @@ class ArticleController extends Controller
         $em->persist($article);
         $em->flush();
 
-        return $this->render("articles/view.html.twig", ['article' => $article]);
+        $comments = $this
+            ->getDoctrine()
+            ->getRepository(Message::class)
+            ->findBy(['article' => $article], ['dateAdded' => 'DESC']);
+
+        return $this->render("articles/view.html.twig",
+            [
+                'article' => $article,
+                'comments' => $comments
+            ]);
     }
 
     /**

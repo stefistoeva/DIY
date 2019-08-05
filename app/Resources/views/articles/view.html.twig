@@ -8,7 +8,7 @@
                 <article>
                     <div class="page-content">
                         <h1 class="mb0">{{ article.title }}</h1>
-{#                        Back to blog#}
+                        {#                        Back to blog#}
                         <div class="meta"><span><a href="{{ path('all_articles') }}"></a></span></div>
                         <p><img src="{{ asset('uploads/images/articles/' ~ article.image) }}" alt="Article image"></p>
                         <p>
@@ -35,21 +35,21 @@
     {% if  app.getUser() %}
         <div class="container body-content span=2 offset=2">
             <div class="well">
-                <form class="form-horizontal" action="{{ path('user_register') }}" method="post">
+                <form class="form-horizontal" action="{{ path('message_create', {id: article.id}) }}" method="post">
                     <fieldset>
                         <legend>Add comment</legend>
                         <div class="form-group">
                             <label class="col-sm-4 control-label" for="comment">Comment:</label>
                             <div class="col-sm-6">
                             <textarea placeholder="Leave a comment..." class="form-control" rows="3"
-                                      name="article[content]" id="comment">
+                                      name="message[content]" id="comment">
                             </textarea>
                                 <small>User: {{ app.getUser().getFullName() }}</small>
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-4 col-sm-offset-4">
-                                <button type="submit" name="Submit" class="btn btn-primary">Send</button>
+                                <input type="submit" name="Submit" class="btn btn-primary" value="Send"/>
                             </div>
                         </div>
                         {#{{ form_row(form._token) }}#}
@@ -58,6 +58,16 @@
             </div>
         </div>
     {% endif %}
+
+    {% for comment in comments %}
+        <div class="container body-content span=2 offset=2">
+            <div class="well">
+                <small>Author: <a href="{{ path('user_profile', {id: comment.author.id}) }}">{{ comment.author.fullName }}</a></small>
+                <p>{{ comment.content }}</p>
+                <small>{{ comment.dateAdded|date("F jS") }}</small>
+            </div>
+        </div>
+    {% endfor %}
 
 
 {% endblock %}

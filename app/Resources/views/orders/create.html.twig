@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container body-content span=8 offset=2">
+        <div class="well">
+            <form class="form-horizontal" enctype="multipart/form-data" action="{{ path('create_order') }}" method="POST">
+                <fieldset>
+                    <legend>New order</legend>
+
+                    <table class="table">
+                        <tr>
+                            <th>Image</th>
+                            <th>Product</th>
+                            <th>Description</th>
+                            <th>Price</th>
+                        </tr>
+                        <tr>
+                            <td><img src="{{ asset('uploads/images/products/' ~ product.image) }}" height="60px" width="90px" alt="{{ product.name }}"/></td>
+                            <td>{{ product.name }}</td>
+                            <td>{{ product.partOfDesc }}</td>
+                            {% if product.promotion %}
+                                <td>
+                                    <span style="text-decoration: line-through">${{ product.price }}</span>
+                                    <span style="color: red">${{ product.discount }}</span>
+                                </td>
+                            {% else %}
+                                <td>${{ product.price }}</td>
+                            {% endif %}
+                        </tr>
+                    </table>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="order_address">Address</label>
+                        <div class="col-sm-4 ">
+                            <input type="text" class="form-control" required="required" id="order_address" placeholder="Address..."
+                                   name="sale[address]">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-4 control-label" for="order_phone">Phone</label>
+                        <div class="col-sm-4 ">
+                            <input type="text" class="form-control" required="required" id="order_phone" placeholder="Phone..."
+                                   name="sale[phone]">
+                        </div>
+                    </div>
+
+{#                    {{ form_row(form._token) }}#}
+
+                    <div class="form-group">
+                        <div class="col-sm-4 col-sm-offset-4">
+                            <a class="btn btn-default" href="{{ path('all_products') }}">Cancel</a>
+                            <button type="submit" class="btn btn-primary">Buy</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+{% endblock %}

@@ -80,6 +80,20 @@ class Product
      */
     private $author;
 
+    /**
+     * @var bool
+     *
+     * @ORM\Column(name="is_deleted", type="boolean")
+     */
+    private $isDeleted;
+
+    /**
+     * @var Sale
+     *
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Sale", mappedBy="product")
+     */
+    private $sale;
+
     public function __construct()
     {
         $this->dateAdded = new \DateTime('now');
@@ -287,4 +301,21 @@ class Product
         $discount = number_format($this->getPrice() * 0.90, 2, '.', '');
         $this->discount = $discount;
     }
+
+    /**
+     * @return bool
+     */
+    public function isDeleted()
+    {
+        return $this->isDeleted;
+    }
+
+    /**
+     * @param bool $isDeleted
+     */
+    public function setIsDeleted($isDeleted)
+    {
+        $this->isDeleted = $isDeleted;
+    }
+
 }

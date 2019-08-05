@@ -6,6 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\JoinColumn;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User
@@ -25,6 +26,13 @@ class User implements UserInterface
     private $id;
 
     /**
+     * @Assert\NotNull()
+     *
+     * @Assert\Email(
+     *     message="The email '{{ value }}' is not a valid email.",
+     *     checkMX=false
+     * )
+     *
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=255, unique=true)
@@ -32,6 +40,19 @@ class User implements UserInterface
     private $email;
 
     /**
+     * @Assert\NotNull()
+     *
+     * @Assert\Length(
+     *     min=4,
+     *     minMessage="Password must be at least 4 symbols long."
+     * )
+     *
+     * @Assert\Regex(
+     *     pattern="/^[a-z0-9]+&/",
+     *     match=true,
+     *     message="Password can contain only lowercase letters and digits."
+     * )
+     *
      * @var string
      *
      * @ORM\Column(name="password", type="string", length=255)
@@ -39,6 +60,20 @@ class User implements UserInterface
     private $password;
 
     /**
+     *
+     * @Assert\Length(
+     *     min = 4,
+     *     max = 50,
+     *     minMessage="Your name must be at least {{ limit }} characters long",
+     *     maxMessage="Your name must be longer than {{ limit }} characters"
+     * )
+     *
+     * @Assert\Regex(
+     *     pattern="/^[A-z]+$/",
+     *     match=true,
+     *     message="Your name should contain only letters."
+     * )
+     *
      * @var string
      *
      * @ORM\Column(name="fullName", type="string", length=255)
@@ -67,6 +102,20 @@ class User implements UserInterface
     /**
      * @var ArrayCollection
      *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Sale", mappedBy="buyer")
+     */
+    private $order;
+
+    /**
+     * @var ArrayCollection|Message[]
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Message", mappedBy="author")
+     */
+    private $comments;
+
+    /**
+     * @var ArrayCollection
+     *
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Product", mappedBy="author")
      *
      * @ORM\JoinColumn(name="authorId", referencedColumnName="id")
@@ -78,6 +127,7 @@ class User implements UserInterface
         $this->roles = new ArrayCollection();
         $this->articles = new ArrayCollection();
         $this->products = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     /**
@@ -288,6 +338,40 @@ class User implements UserInterface
         return $this;
     }
 
+    /**
+     * @return Message[]|ArrayCollection
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
 
+    /**
+     * @param Message $comments
+     * @return User
+     */
+    public function setComments(Message $comments)
+    {
+        $this->comments[] = $comments;
+        return $this;
+    }
+
+    /**
+     * @return ArrayCollection|Sale[]
+     */
+    public function getOrder()
+    {
+        return $this->order;
+    }
+
+    /**
+     * @param Sale $order
+     * @return User
+     */
+    public function setOrder(Sale $order)
+    {
+        $this->order[] = $order;
+        return $this;
+    }
 }
 

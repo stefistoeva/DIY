@@ -18,7 +18,7 @@
                 {% else %}
                     <span>${{ product.price }}</span>
                 {% endif %}
-                <a href="#" class="btn btn-primary">Add to cart</a>
+                <a href="{{ path('create_order', {id: product.id}) }}" class="btn btn-primary">Buy</a>
                 {% if app.getUser() and app.getUser().isAdmin() %}
                     <a class="btn btn-success" href="{{ path('product_edit', {id: product.id}) }}">Edit</a>
                     <a class="btn btn-danger" href="{{ path('product_delete', {id: product.id}) }}">Delete</a>
