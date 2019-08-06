@@ -2,8 +2,8 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Sale;
-use AppBundle\Form\SaleType;
+use AppBundle\Entity\Order;
+use AppBundle\Form\OrderType;
 use AppBundle\Service\Products\ProductServiceInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,7 +11,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class SaleController extends Controller
+class OrderController extends Controller
 {
     /**
      * @var ProductServiceInterface
@@ -22,7 +22,6 @@ class SaleController extends Controller
     {
         $this->productService = $productService;
     }
-
 
     /**
      * @Route("/order/create", name="create_order", methods={"GET"})
@@ -38,7 +37,7 @@ class SaleController extends Controller
         return $this->render("orders/create.html.twig",
             [
                 'form' => $this
-                    ->createForm(SaleType::class)
+                    ->createForm(OrderType::class)
                     ->createView(),
                 'product' => $product,
             ]
@@ -57,8 +56,8 @@ class SaleController extends Controller
         var_dump($request);exit;
         $product = $this->productService->getOne($id);
 
-        $order = new Sale();
-        $form = $this->createForm(SaleType::class, $order);
+        $order = new Order();
+        $form = $this->createForm(OrderType::class, $order);
         $form->handleRequest($request);
 
         $order
@@ -89,8 +88,8 @@ class SaleController extends Controller
 //    public function create(Request $request, $id)
 //    {
 //        $product = $this->productService->getOne($id);
-//        $order = new Sale();
-//        $form = $this->createForm(SaleType::class, $order);
+//        $order = new Order();
+//        $form = $this->createForm(OrderType::class, $order);
 //        $form->handleRequest($request);
 //
 //        $order

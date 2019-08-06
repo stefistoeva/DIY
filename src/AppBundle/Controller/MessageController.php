@@ -2,10 +2,10 @@
 
 namespace AppBundle\Controller;
 
-use AppBundle\Entity\Article;
-use AppBundle\Entity\Message;
 use AppBundle\Form\MessageType;
-use AppBundle\Service\Articles\ArticleServiceInterface;
+use AppBundle\Service\Message\MessageServiceInterface;
+use AppBundle\Service\Users\UserServiceInterface;
+use AppBundle\Entity\Message;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,40 +15,55 @@ use Symfony\Component\Routing\Annotation\Route;
 class MessageController extends Controller
 {
     /**
-     * @var ArticleServiceInterface
+     * @var MessageServiceInterface
      */
-    private $articleService;
+    private $messageService;
 
-    public function __construct(ArticleServiceInterface $articleService)
+    /**
+     * @var UserServiceInterface
+     */
+    private $userService;
+
+    public function __construct(
+        UserServiceInterface $userService,
+        MessageServiceInterface $messageService)
     {
-        $this->articleService = $articleService;
+        $this->userService = $userService;
+        $this->messageService = $messageService;
     }
 
     /**
-     * @Route("/comment/create/{id}", name="message_create", methods={"POST"})
-     * @param Request $request
+     * @Route("/user/{id}/message", name="user_message", methods={"GET"})
+     *
      * @param $id
      * @return Response
      * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      */
-    public function create(Request $request, $id)
+    public function create($id)
     {
-        $article = $this->articleService->getOne($id);
+        return $this->render('users/message.html.twig',
+            [
+                'user' => $this->userService->findOneById($id)
+            ]);
+    }
+
+    /**
+     * @Route("/user/{id}/message", methods={"POST"})
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     * @param Request $request
+     * @param $id
+     * @return Response
+     */
+    public function createProcess(Request $request, $id)
+    {
         $message = new Message();
         $form = $this->createForm(MessageType::class, $message);
         $form->handleRequest($request);
-
-        $message
-            ->setAuthor($this->getUser())
-            ->setArticle($article);
-
-        $em = $this->getDoctrine()->getManager();
-        $em->persist($message);
-        $em->flush();
-
-        return $this->redirectToRoute("article_view",
+        $this->messageService->create($message, $id);
+        $this->addFlash("info", "Message sent successfully!");
+        return $this->redirectToRoute("user_message",
             [
-                'id' => $article->getId()
+                'id' => $id
             ]);
     }
 }

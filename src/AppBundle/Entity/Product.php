@@ -88,9 +88,9 @@ class Product
     private $isDeleted;
 
     /**
-     * @var Sale
+     * @var Order
      *
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Sale", mappedBy="product")
+     * @ORM\OneToOne(targetEntity="Order.php", mappedBy="product")
      */
     private $sale;
 

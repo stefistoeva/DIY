@@ -3,11 +3,10 @@
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class MessageType extends AbstractType
+class CommentType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -15,8 +14,7 @@ class MessageType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('about', TextType::class)
-            ->add('content', TextType::class);
+            ->add('content');
     }
 
     /**
@@ -25,7 +23,7 @@ class MessageType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Message'
+            'data_class' => 'AppBundle\Entity\Comment'
         ));
     }
 }

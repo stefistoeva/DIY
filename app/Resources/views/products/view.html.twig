@@ -11,6 +11,11 @@
                 <h1>{{ product.name }}</h1>
                 <p>{{ product.description }}</p>
             </div>
+            <small class="seller">
+                Seller: {{ product.author.fullName }}
+                <br/>
+                <a class="btn btn-sm btn-default" href="{{ path('user_message', {id: product.author.id}) }}">Leave message</a>
+            </small>
             <div class="product-price">
                 {% if product.promotion %}
                     <span style="text-decoration: line-through">${{ product.price }}</span>

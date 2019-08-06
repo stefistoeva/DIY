@@ -102,14 +102,14 @@ class User implements UserInterface
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Sale", mappedBy="buyer")
+     * @ORM\OneToMany(targetEntity="Order.php", mappedBy="buyer")
      */
     private $order;
 
     /**
-     * @var ArrayCollection|Message[]
+     * @var ArrayCollection|Comment[]
      *
-     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Message", mappedBy="author")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Comment", mappedBy="author")
      */
     private $comments;
 
@@ -122,12 +122,28 @@ class User implements UserInterface
      */
     private $products;
 
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Message", mappedBy="sender")
+     */
+    private $senderMessage;
+
+    /**
+     * @var ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Message", mappedBy="recipient")
+     */
+    private $recipientMessages;
+
     public function __construct()
     {
         $this->roles = new ArrayCollection();
         $this->articles = new ArrayCollection();
         $this->products = new ArrayCollection();
         $this->comments = new ArrayCollection();
+        $this->senderMessage = new ArrayCollection();
+        $this->recipientMessages = new ArrayCollection();
     }
 
     /**
@@ -339,7 +355,7 @@ class User implements UserInterface
     }
 
     /**
-     * @return Message[]|ArrayCollection
+     * @return Comment[]|ArrayCollection
      */
     public function getComments()
     {
@@ -347,17 +363,17 @@ class User implements UserInterface
     }
 
     /**
-     * @param Message $comments
+     * @param Comment $comments
      * @return User
      */
-    public function setComments(Message $comments)
+    public function setComments(Comment $comments)
     {
         $this->comments[] = $comments;
         return $this;
     }
 
     /**
-     * @return ArrayCollection|Sale[]
+     * @return ArrayCollection|Order[]
      */
     public function getOrder()
     {
@@ -365,13 +381,45 @@ class User implements UserInterface
     }
 
     /**
-     * @param Sale $order
+     * @param Order $order
      * @return User
      */
-    public function setOrder(Sale $order)
+    public function setOrder(Order $order)
     {
         $this->order[] = $order;
         return $this;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getSenderMessage(): ArrayCollection
+    {
+        return $this->senderMessage;
+    }
+
+    /**
+     * @param ArrayCollection $senderMessage
+     */
+    public function setSenderMessage(ArrayCollection $senderMessage): void
+    {
+        $this->senderMessage = $senderMessage;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getRecipientMessages(): ArrayCollection
+    {
+        return $this->recipientMessages;
+    }
+
+    /**
+     * @param ArrayCollection $recipientMessages
+     */
+    public function setRecipientMessages(ArrayCollection $recipientMessages): void
+    {
+        $this->recipientMessages = $recipientMessages;
     }
 }
 

@@ -3,10 +3,11 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Article;
-use AppBundle\Entity\Message;
+use AppBundle\Entity\Comment;
 use AppBundle\Entity\User;
 use AppBundle\Form\ArticleType;
 use AppBundle\Service\Articles\ArticleServiceInterface;
+use AppBundle\Service\Comment\CommentServiceInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Form\FormInterface;
@@ -23,12 +24,21 @@ class ArticleController extends Controller
     private $articleService;
 
     /**
+     * @var CommentServiceInterface
+     */
+    private $commentService;
+
+    /**
      * ArticleController constructor.
      * @param ArticleServiceInterface $articleService
+     * @param CommentServiceInterface $commentService
      */
-    public function __construct(ArticleServiceInterface $articleService)
+    public function __construct(
+        ArticleServiceInterface $articleService,
+        CommentServiceInterface $commentService)
     {
         $this->articleService = $articleService;
+        $this->commentService = $commentService;
     }
 
     /**
@@ -170,10 +180,7 @@ class ArticleController extends Controller
         $em->persist($article);
         $em->flush();
 
-        $comments = $this
-            ->getDoctrine()
-            ->getRepository(Message::class)
-            ->findBy(['article' => $article], ['dateAdded' => 'DESC']);
+        $comments = $this->commentService->getAllByArticle($id);
 
         return $this->render("articles/view.html.twig",
             [

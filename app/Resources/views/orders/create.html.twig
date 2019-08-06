@@ -5,19 +5,21 @@
         <div class="well">
             <form class="form-horizontal" enctype="multipart/form-data" action="{{ path('create_order') }}" method="POST">
                 <fieldset>
-                    <legend>New order</legend>
+                    <legend>My order</legend>
 
                     <table class="table">
                         <tr>
                             <th>Image</th>
                             <th>Product</th>
                             <th>Description</th>
+                            <th>Seller</th>
                             <th>Price</th>
                         </tr>
                         <tr>
                             <td><img src="{{ asset('uploads/images/products/' ~ product.image) }}" height="60px" width="90px" alt="{{ product.name }}"/></td>
                             <td>{{ product.name }}</td>
                             <td>{{ product.partOfDesc }}</td>
+                            <td>{{ product.author.fullName }}</td>
                             {% if product.promotion %}
                                 <td>
                                     <span style="text-decoration: line-through">${{ product.price }}</span>
@@ -50,7 +52,7 @@
                     <div class="form-group">
                         <div class="col-sm-4 col-sm-offset-4">
                             <a class="btn btn-default" href="{{ path('all_products') }}">Cancel</a>
-                            <button type="submit" class="btn btn-primary">Buy</button>
+                            <button type="submit" class="btn btn-primary">Checkout</button>
                         </div>
                     </div>
                 </fieldset>

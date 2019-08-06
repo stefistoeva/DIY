@@ -5,12 +5,12 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Sale
+ * Order
  *
  * @ORM\Table(name="sale")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\SaleRepository")
+ * @ORM\Entity(repositoryClass="OrderRepository")
  */
-class Sale
+class Order
 {
     /**
      * @var int
@@ -56,6 +56,7 @@ class Sale
      */
     private $product;
 
+
     public function __construct()
     {
         $this->dateAdded = new \DateTime('now');
@@ -76,7 +77,7 @@ class Sale
      *
      * @param string $address
      *
-     * @return Sale
+     * @return Order
      */
     public function setAddress($address)
     {
@@ -100,7 +101,7 @@ class Sale
      *
      * @param string $phone
      *
-     * @return Sale
+     * @return Order
      */
     public function setPhone($phone)
     {
@@ -145,7 +146,7 @@ class Sale
 
     /**
      * @param User $buyer
-     * @return Sale
+     * @return Order
      */
     public function setBuyer(User $buyer)
     {

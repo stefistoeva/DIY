@@ -3,15 +3,14 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints\Date;
 
 /**
- * Message
+ * Comment
  *
- * @ORM\Table(name="messages")
- * @ORM\Entity(repositoryClass="AppBundle\Repository\MessageRepository")
+ * @ORM\Table(name="comments")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\CommentRepository")
  */
-class Message
+class Comment
 {
     /**
      * @var int
@@ -21,13 +20,6 @@ class Message
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="about", type="string", length=255)
-     */
-    private $about;
 
     /**
      * @var string
@@ -46,16 +38,16 @@ class Message
     /**
      * @var User
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="senderMessages")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="comments")
      */
-    private $sender;
+    private $author;
 
     /**
-     * @var User
+     * @var Article
      *
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="recipientMessages")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Article", inversedBy="comments")
      */
-    private $recipient;
+    private $article;
 
     public function __construct()
     {
@@ -73,35 +65,11 @@ class Message
     }
 
     /**
-     * Set about.
-     *
-     * @param string $about
-     *
-     * @return Message
-     */
-    public function setAbout($about)
-    {
-        $this->about = $about;
-
-        return $this;
-    }
-
-    /**
-     * Get about.
-     *
-     * @return string
-     */
-    public function getAbout()
-    {
-        return $this->about;
-    }
-
-    /**
      * Set content.
      *
      * @param string $content
      *
-     * @return Message
+     * @return Comment
      */
     public function setContent($content)
     {
@@ -125,7 +93,7 @@ class Message
      *
      * @param \DateTime $dateAdded
      *
-     * @return Message
+     * @return Comment
      */
     public function setDateAdded($dateAdded)
     {
@@ -147,37 +115,36 @@ class Message
     /**
      * @return User
      */
-    public function getSender(): User
+    public function getAuthor(): User
     {
-        return $this->sender;
+        return $this->author;
     }
 
     /**
-     * @param User $sender
-     * @return Message
+     * @param User $author
+     * @return Comment
      */
-    public function setSender(User $sender)
+    public function setAuthor(User $author)
     {
-        $this->sender = $sender;
+        $this->author = $author;
         return $this;
     }
 
     /**
-     * @return User
+     * @return Article
      */
-    public function getRecipient(): User
+    public function getArticle(): Article
     {
-        return $this->recipient;
+        return $this->article;
     }
 
     /**
-     * @param User $recipient
-     * @return Message
+     * @param Article $article
+     * @return Comment
      */
-    public function setRecipient(User $recipient)
+    public function setArticle(Article $article)
     {
-        $this->recipient = $recipient;
+        $this->article = $article;
         return $this;
     }
-
 }

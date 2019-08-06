@@ -45,7 +45,7 @@
                             <h5 class="card-price">${{ product.price }}</h5>
                         {% endif %}
                         <a href="{{ path('product_view', {id: product.id}) }}" class="btn btn-primary">View</a>
-{#                        <a href="{{ path('create_order') }}" class="btn btn-primary">Buy</a>#}
+                        <a href="{{ path('create_order', {id: product.id}) }}" class="btn btn-primary">Buy</a>
                     </div>
                 </div>
             </div>

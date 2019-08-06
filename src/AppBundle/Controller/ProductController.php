@@ -170,7 +170,10 @@ class ProductController extends Controller
         $em->persist($product);
         $em->flush();
 
-        return $this->render("products/view.html.twig", ['product' => $product]);
+        return $this->render("products/view.html.twig",
+            [
+                'product' => $product
+            ]);
     }
 
 
@@ -189,7 +192,10 @@ class ProductController extends Controller
                     'dateAdded' => 'DESC'
                 ]);
 
-        return $this->render('products/products.html.twig', ['products' => $products]);
+        return $this->render('products/products.html.twig',
+            [
+                'products' => $products
+            ]);
     }
 
     /**
