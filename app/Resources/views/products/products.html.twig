@@ -2,12 +2,15 @@
 
 {% block body %}
 
-    {% for msg in app.session.flashbag.get('errors') %}
-        <div class="alert alert-danger">
+    {% for msg in app.session.flashbag.get('order') %}
+        <div class="alert alert-success" id="order">
             {{ msg }}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
+        </div>
+    {% endfor %}
+
+    {% for msg in app.session.flashbag.get('gift') %}
+        <div class="alert alert-success" id="gift">
+            {{ msg }}
         </div>
     {% endfor %}
 

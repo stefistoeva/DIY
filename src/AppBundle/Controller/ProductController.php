@@ -65,7 +65,7 @@ class ProductController extends Controller
         $this->fileUpload($form, $product);
 
         $this->productService->create($product);
-        $this->addFlash("info", "Add gift successfully!");
+        $this->addFlash("gift", "Add gift successfully!");
 
         return $this->redirectToRoute("all_products");
     }

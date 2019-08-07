@@ -45,7 +45,7 @@ class CommentController extends Controller
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 
-        $this->addFlash("info", "Comment created successfully.");
+        $this->addFlash("comment", "Comment created successfully.");
         $this->commentService->create($comment, $id);
 
         return $this->redirectToRoute("article_view",

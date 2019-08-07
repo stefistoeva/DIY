@@ -67,7 +67,7 @@ class OrderController extends Controller
         $form = $this->createForm(OrderType::class, $order);
         $form->handleRequest($request);
         $this->orderService->create($order, $id);
-        $this->addFlash("info", "Create order successfully!");
+        $this->addFlash("order", "Create order successfully!");
 
         return $this->redirectToRoute("product_view",
             [

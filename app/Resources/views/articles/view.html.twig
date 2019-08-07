@@ -2,8 +2,8 @@
 
 {% block main %}
 
-    {% for msg in app.session.flashbag.get('info') %}
-        <div class="alert alert-success" id="info">
+    {% for msg in app.session.flashbag.get('comment') %}
+        <div class="alert alert-success" id="comment">
             {{ msg }}
         </div>
     {% endfor %}

@@ -1,13 +1,6 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
-    {% for msg in app.session.flashbag.get('info') %}
-        <div class="alert alert-success" id="info">
-            {{ msg }}
-        </div>
-    {% endfor %}
-
     <div class="post-container">
         <div class="post-thumb">
             <img src="{{ asset('uploads/images/products/' ~ product.image) }}" alt="{{ product.name }}"/>
