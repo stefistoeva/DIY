@@ -5,6 +5,9 @@
     {% for msg in app.session.flashbag.get('comment') %}
         <div class="alert alert-success" id="comment">
             {{ msg }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
         </div>
     {% endfor %}
 
@@ -16,7 +19,7 @@
                         <h1 class="mb0">{{ article.title }}</h1>
                         {#                        Back to blog#}
                         <div class="meta"><span><a href="{{ path('all_articles') }}"></a></span></div>
-                        <p><img src="{{ asset('uploads/images/articles/' ~ article.image) }}" alt="Article image"></p>
+                        <p><img src="{{ asset('uploads/images/articles/' ~ article.image) }}" width="620px" height="350px" alt="Article image"></p>
                         <p>
                             {{ article.content }}
                         </p>

@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block main %}
+    {% for msg in messages %}
+        <h3>
+            <a href="{{ path('user_mailbox_message', {id: msg.id}) }}">{{ msg.about }}
+            </a>
+        </h3>
+        {% if msg.isRead %}
+            <span style="color: green; float:right;">Read</span>
+        {% else %}
+            <span style="color: red; float:right;">Unread</span>
+        {% endif %}
+        <small>From: {{ msg.sender.fullName }}</small>
+        <hr/>
+    {% endfor %}
+{% endblock %}

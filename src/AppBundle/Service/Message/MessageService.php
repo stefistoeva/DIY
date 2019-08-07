@@ -7,6 +7,7 @@ namespace AppBundle\Service\Message;
 use AppBundle\Entity\Message;
 use AppBundle\Repository\MessageRepository;
 use AppBundle\Service\Users\UserServiceInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\ORMException;
 
 class MessageService implements MessageServiceInterface
@@ -43,5 +44,29 @@ class MessageService implements MessageServiceInterface
             ->setRecipient($recipient);
 
         return $this->messageRepository->insert($message);
+    }
+
+    public function getAllByUser()
+    {
+        return $this
+            ->messageRepository
+            ->findBy(
+                [
+                    'recipient' => $this
+                        ->userService
+                        ->currentUser()
+                ],
+                [
+                    'dateAdded' => "DESC"
+                ]);
+    }
+
+    /**
+     * @param int $id
+     * @return Message|null|object
+     */
+    public function getOne(int $id): ?Message
+    {
+        return $this->messageRepository->find($id);
     }
 }

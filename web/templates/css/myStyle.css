@@ -178,3 +178,17 @@ nav ul li a {
     margin-right: auto;
     width: 80%;
 }
+
+.profile_style {
+    text-align: center;
+    display: inline-block;
+    margin-right: 5px;
+    float: left;
+    position: relative;
+}
+
+.profile_orders_style {
+    text-align: left;
+    display: inline-block;
+    width: 80%;
+}

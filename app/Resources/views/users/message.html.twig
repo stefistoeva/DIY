@@ -8,6 +8,12 @@
         </div>
     {% endfor %}
 
+    {% for msg in app.session.flashbag.get('answer') %}
+        <div class="alert alert-success" id="answer">
+            {{ msg }}
+        </div>
+    {% endfor %}
+
     <div class="container body-content span=8 offset=2">
         <div class="well my-style">
             <form name="authenticate" class="form-horizontal" method="post">

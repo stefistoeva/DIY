@@ -3,26 +3,60 @@
 {% block body_id 'login' %}
 
 {% block main %}
-
     <div class="container body-content span=8 offset=2">
-        <div class="well">
+        <div class="well profile_style">
             <form name="authenticate" class="form-horizontal" action="{{ path('security_login') }}" method="post">
                 <fieldset>
                     <legend>My profile</legend>
                     <div class="form-group">
-                        <div class="col-sm-4 col-sm-offset-4">
-                            <a class="btn btn-default" href="{{ path('diy_index') }}">My article</a>
-                            <a class="btn btn-default" href="{{ path('diy_index') }}">My article</a>
-                            <a class="btn btn-default" href="{{ path('diy_index') }}">My article</a>
-                        </div>
+                        <label for="user_email">
+                            <small>Email:</small>{{ user.email }}</label>
                     </div>
                     <div class="form-group">
-                        <label class="col-sm-4 control-label" for="user_email"><small>Email: </small>{{ user.email }}</label>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-4 control-label" for="full_name"><small>Full name: </small>{{ user.fullName }}
+                        <label for="full_name">
+                            <small>Full name:</small>{{ user.fullName }}
                         </label>
                     </div>
+                    <div class="form-group">
+                        <a href="{{ path('user_mailbox') }}" class="btn btn-info btn-sm">
+                            <span class="glyphicon glyphicon-envelope"></span>
+                            Message
+                        </a>
+                    </div>
+                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
+                </fieldset>
+            </form>
+        </div>
+        <div class="well profile_orders_style">
+            <form name="authenticate" class="form-horizontal" action="{{ path('security_login') }}" method="post">
+                <fieldset>
+                    <legend>My orders</legend>
+
+                    <table class="table">
+                        <tr>
+                            <th>Image</th>
+                            <th>Product</th>
+                            <th>Description</th>
+                            <th>Seller</th>
+                            <th>Price</th>
+                        </tr>
+                        {#                        <tr>#}
+                        {#                            <td><img src="{{ asset('uploads/images/products/' ~ product.image) }}" height="60px"#}
+                        {#                                     width="90px" alt="{{ product.name }}"/></td>#}
+                        {#                            <td>{{ product.name }}</td>#}
+                        {#                            <td>{{ product.partOfDesc }}</td>#}
+                        {#                            <td>{{ product.author.fullName }}</td>#}
+                        {#                            {% if product.promotion %}#}
+                        {#                                <td>#}
+                        {#                                    <span style="text-decoration: line-through">${{ product.price }}</span>#}
+                        {#                                    <span style="color: red">${{ product.discount }}</span>#}
+                        {#                                </td>#}
+                        {#                            {% else %}#}
+                        {#                                <td>${{ product.price }}</td>#}
+                        {#                            {% endif %}#}
+                        {#                        </tr>#}
+                    </table>
+
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
                 </fieldset>
             </form>

@@ -76,7 +76,6 @@ class Article
      */
     private $comments;
 
-
     public function __construct()
     {
         $this->dateAdded = new DateTime('now');

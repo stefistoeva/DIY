@@ -44,6 +44,13 @@ class Message
     private $dateAdded;
 
     /**
+     * @var bool
+     *
+     * @ORM\Column(name="is_read", type="boolean")
+     */
+    private $isRead;
+
+    /**
      * @var User
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="senderMessages")
@@ -178,6 +185,22 @@ class Message
     {
         $this->recipient = $recipient;
         return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isRead()
+    {
+        return $this->isRead;
+    }
+
+    /**
+     * @param bool $isRead
+     */
+    public function setIsRead(bool $isRead)
+    {
+        $this->isRead = $isRead;
     }
 
 }

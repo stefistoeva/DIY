@@ -125,14 +125,14 @@ class User implements UserInterface
     private $products;
 
     /**
-     * @var ArrayCollection
+     * @var ArrayCollection|Message[]
      *
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Message", mappedBy="sender")
      */
     private $senderMessage;
 
     /**
-     * @var ArrayCollection
+     * @var ArrayCollection|Message[]
      *
      * @ORM\OneToMany(targetEntity="AppBundle\Entity\Message", mappedBy="recipient")
      */
