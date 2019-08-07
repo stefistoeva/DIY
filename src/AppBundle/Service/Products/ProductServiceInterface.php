@@ -16,5 +16,5 @@ interface ProductServiceInterface
     public function create(Product $product): bool ;
     public function edit(Product $product): bool ;
     public function delete(Product $product): bool ;
-    public function getOne(int $id): ?Product;
+    public function getOneById(int $id): ?Product;
 }

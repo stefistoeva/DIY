@@ -25,7 +25,7 @@ class OrderType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Order'
+            'data_class' => 'AppBundle\Entity\Order'
         ));
     }
 }

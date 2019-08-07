@@ -78,7 +78,7 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $product = $this->productService->getOne($id);
+        $product = $this->productService->getOneById($id);
 
         if (null === $product || !$this->isAdmin()) {
             return $this->redirectToRoute("all_products");
@@ -101,7 +101,7 @@ class ProductController extends Controller
      */
     public function editProcess(Request $request, $id)
     {
-        $product = $this->productService->getOne($id);
+        $product = $this->productService->getOneById($id);
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
         $this->fileUpload($form, $product);
@@ -119,7 +119,7 @@ class ProductController extends Controller
      */
     public function delete(int $id)
     {
-        $product = $this->productService->getOne($id);
+        $product = $this->productService->getOneById($id);
 
         if (null === $product || !$this->isAdmin()) {
             return $this->redirectToRoute("all_products");
@@ -141,7 +141,7 @@ class ProductController extends Controller
      */
     public function deleteProcess(Request $request, int $id)
     {
-        $product = $this->productService->getOne($id);
+        $product = $this->productService->getOneById($id);
 
         $form = $this->createForm(ProductType::class, $product);
 
@@ -160,9 +160,9 @@ class ProductController extends Controller
      */
     public function view($id)
     {
-        $product = $this->productService->getOne($id);
+        $product = $this->productService->getOneById($id);
 
-        if (null === $product) {
+        if (null === $product || $product->getIsDeleted() == 1) {
             return $this->redirectToRoute("all_products");
         }
 
@@ -187,7 +187,10 @@ class ProductController extends Controller
         $products = $this
             ->getDoctrine()
             ->getRepository(Product::class)
-            ->findBy([],
+            ->findBy(
+                [
+                    'isDeleted' => 0
+                ],
                 [
                     'dateAdded' => 'DESC'
                 ]);

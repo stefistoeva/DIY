@@ -7,8 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Order
  *
- * @ORM\Table(name="sale")
- * @ORM\Entity(repositoryClass="OrderRepository")
+ * @ORM\Table(name="orders")
+ * @ORM\Entity(repositoryClass="AppBundle\Repository\OrderRepository")
  */
 class Order
 {
@@ -47,12 +47,12 @@ class Order
      *
      * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="order")
      */
-    private $buyer;
+    private $customer;
 
     /**
      * @var Product
      *
-     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Product", inversedBy="sale")
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Product", inversedBy="sold")
      */
     private $product;
 
@@ -139,18 +139,18 @@ class Order
     /**
      * @return User
      */
-    public function getBuyer(): User
+    public function getCustomer(): User
     {
-        return $this->buyer;
+        return $this->customer;
     }
 
     /**
-     * @param User $buyer
+     * @param User $customer
      * @return Order
      */
-    public function setBuyer(User $buyer)
+    public function setCustomer(User $customer)
     {
-        $this->buyer = $buyer;
+        $this->customer = $customer;
         return $this;
     }
 

@@ -25,8 +25,11 @@
 
                     {% if app.getUser() %}
                         <div class="form-group">
-                            <div>
+                            <div style="margin-bottom: 5px">
                                 <a class="btn btn-default" id="add">Add message</a>
+                            </div>
+                            <div>
+                                <a class="btn btn-default" href="{{ path('user_profile') }}" id="profile">My profile</a>
                             </div>
                         </div>
                     {% endif %}

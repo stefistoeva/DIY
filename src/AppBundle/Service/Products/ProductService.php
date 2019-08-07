@@ -73,7 +73,7 @@ class ProductService implements ProductServiceInterface
      * @param int $id
      * @return Product|null|object
      */
-    public function getOne(int $id): ?Product
+    public function getOneById(int $id): ?Product
     {
         return $this->productRepository->find($id);
     }

@@ -102,7 +102,9 @@ class User implements UserInterface
     /**
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="Order.php", mappedBy="buyer")
+     * @ORM\OneToMany(targetEntity="AppBundle\Entity\Order", mappedBy="customer")
+     *
+     * @JoinColumn(name="orders")
      */
     private $order;
 

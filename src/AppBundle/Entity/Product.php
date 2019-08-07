@@ -90,9 +90,9 @@ class Product
     /**
      * @var Order
      *
-     * @ORM\OneToOne(targetEntity="Order.php", mappedBy="product")
+     * @ORM\OneToOne(targetEntity="AppBundle\Entity\Order", mappedBy="product")
      */
-    private $sale;
+    private $sold;
 
     public function __construct()
     {
@@ -305,7 +305,7 @@ class Product
     /**
      * @return bool
      */
-    public function isDeleted()
+    public function getIsDeleted()
     {
         return $this->isDeleted;
     }
@@ -318,4 +318,19 @@ class Product
         $this->isDeleted = $isDeleted;
     }
 
+    /**
+     * @return Order
+     */
+    public function getSold()
+    {
+        return $this->sold;
+    }
+
+    /**
+     * @param Order $sold
+     */
+    public function setSold($sold)
+    {
+        $this->sold = $sold;
+    }
 }
