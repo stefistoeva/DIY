@@ -5,6 +5,9 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Role;
 use AppBundle\Entity\User;
 use AppBundle\Form\UserType;
+use AppBundle\Service\Message\MessageServiceInterface;
+use AppBundle\Service\Orders\OrderServiceInterface;
+use AppBundle\Service\Products\ProductServiceInterface;
 use AppBundle\Service\Users\UserServiceInterface;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -19,9 +22,24 @@ class UserController extends Controller
      */
     private $userService;
 
-    public function __construct(UserServiceInterface $userService)
+    /**
+     * @var MessageServiceInterface
+     */
+    private $messageService;
+
+    /**
+     * @var OrderServiceInterface
+     */
+    private $orderService;
+
+    public function __construct(
+        UserServiceInterface $userService,
+        MessageServiceInterface $messageService,
+        OrderServiceInterface $orderService)
     {
         $this->userService = $userService;
+        $this->messageService = $messageService;
+        $this->orderService = $orderService;
     }
 
     /**
@@ -55,8 +73,16 @@ class UserController extends Controller
      */
     public function profile()
     {
+        if (empty($this->orderService->getAllByUser())) {
+            $this->addFlash("no_order", "You doesn't have any orders!");
+        }
+
         return $this->render("users/profile.html.twig",
-            ['user' => $this->userService->currentUser()]);
+            [
+                'user' => $this->userService->currentUser(),
+                'msg' => $this->messageService->getAllUnseenByUser(),
+                'orders' => $this->orderService->getAllByUser(),
+            ]);
     }
 
     /**

@@ -59,7 +59,6 @@ class MessageController extends Controller
     {
         $message = new Message();
         $form = $this->createForm(MessageType::class, $message);
-        $message->setIsRead(0);
         $form->handleRequest($request);
         $this->messageService->create($message, $id);
         $this->addFlash("message", "Message sent successfully!");
@@ -75,9 +74,15 @@ class MessageController extends Controller
      */
     public function getAllByUser()
     {
+        $messages = $this->messageService->getAllByUser();
+
+        if (empty($messages)) {
+            $this->addFlash("not", "You doesn't have any messages!");
+        }
+
         return $this->render("users/mailbox.html.twig",
             [
-                'messages' => $this->messageService->getAllByUser()
+                'messages' => $messages
             ]);
     }
 
@@ -110,7 +115,6 @@ class MessageController extends Controller
     public function sentMessageToRecipient(Request $request, int $id)
     {
         $message = new Message();
-        $message->setIsRead(0);
         $form = $this->createForm(MessageType::class, $message);
         $form->handleRequest($request);
         $this->messageService->create($message, $id);

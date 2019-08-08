@@ -47,7 +47,14 @@
                     <li><a href="{{ path('all_articles') }}">Blog</a></li>
                     <li><a href="#">About</a></li>
                     {% if app.user %}
-                        <li><a href="{{ path('user_profile') }}">My profile</a></li>
+                        <li><a href="{{ path('user_profile') }}">My profile
+                                {% if app.user.recipientMessages|length %}
+                            <span style="color: #F76E6E;">
+                                (new)
+                            </span>
+                                {% endif %}
+                            </a>
+                        </li>
                         <li><a href="{{ path('security_logout') }}">Logout</a></li>
                     {% else %}
                         <li><a href="{{ path('security_login') }}">Sign In</a></li>

@@ -1,17 +1,25 @@
 {% extends 'base.html.twig' %}
 
 {% block main %}
+
+    {% for msg in app.session.flashbag.get('not') %}
+        <div class="alert alert-info" id="not">
+            {{ msg }}
+        </div>
+        <a class="btn btn-default" href="{{ path('user_profile') }}">Back</a>
+    {% endfor %}
+
     {% for msg in messages %}
-        <h3>
-            <a href="{{ path('user_mailbox_message', {id: msg.id}) }}">{{ msg.about }}
-            </a>
-        </h3>
-        {% if msg.isRead %}
-            <span style="color: green; float:right;">Read</span>
-        {% else %}
-            <span style="color: red; float:right;">Unread</span>
-        {% endif %}
-        <small>From: {{ msg.sender.fullName }}</small>
-        <hr/>
+        <div id="fh5co-projects-feed" class="fh5co-projects-feed clearfix masonry">
+            <div class="fh5co-project masonry-brick">
+                <div {% if msg.isRead %} style="background-color: #fcfdff; padding: 50px" {% else %} style="background-color: #dce3e2; padding: 50px;" {% endif %}>
+                    <h3>
+                        <a href="{{ path('user_mailbox_message', {id: msg.id}) }}">{{ msg.about }}
+                        </a>
+                    </h3>
+                    <div>From: {{ msg.sender.fullName }}</div>
+                </div>
+            </div>
+        </div>
     {% endfor %}
 {% endblock %}

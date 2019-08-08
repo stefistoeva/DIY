@@ -74,4 +74,22 @@ class OrderController extends Controller
                 'id' => $id
             ]);
     }
+
+//    /**
+//     * @Route("/profile", name="order_table", methods={"GET"})
+//     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+//     */
+//    public function getAllByUser()
+//    {
+//        $orders = $this->orderService->getAllByUser();
+//
+////        if (empty($orders)) {
+////            $this->addFlash("not", "You doesn't have any messages!");
+////        }
+//
+//        return $this->render("users/profile.html.twig",
+//            [
+//                'order' => $orders
+//            ]);
+//    }
 }

@@ -67,6 +67,7 @@ class Message
     public function __construct()
     {
         $this->dateAdded = new \DateTime('now');
+        $this->setIsRead(false);
     }
 
     /**

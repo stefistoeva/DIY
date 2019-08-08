@@ -14,4 +14,6 @@ interface MessageServiceInterface
     public function getAllByUser();
 
     public function getOne(int $id): ?Message;
+
+    public function getAllUnseenByUser();
 }

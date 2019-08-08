@@ -69,4 +69,14 @@ class MessageService implements MessageServiceInterface
     {
         return $this->messageRepository->find($id);
     }
+
+    public function getAllUnseenByUser()
+    {
+        return $this->messageRepository
+            ->findBy(
+            [
+                'recipient' => $this->userService->currentUser(),
+                'isRead' => false
+            ]);
+    }
 }

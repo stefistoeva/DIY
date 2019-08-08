@@ -393,33 +393,33 @@ class User implements UserInterface
     }
 
     /**
-     * @return ArrayCollection
+     * @return ArrayCollection|Message[]
      */
-    public function getSenderMessage(): ArrayCollection
+    public function getSenderMessage()
     {
         return $this->senderMessage;
     }
 
     /**
-     * @param ArrayCollection $senderMessage
+     * @param ArrayCollection|Message[] $senderMessage
      */
-    public function setSenderMessage(ArrayCollection $senderMessage): void
+    public function setSenderMessage($senderMessage)
     {
         $this->senderMessage = $senderMessage;
     }
 
     /**
-     * @return ArrayCollection
+     * @return ArrayCollection|Message[]
      */
-    public function getRecipientMessages(): ArrayCollection
+    public function getRecipientMessages()
     {
         return $this->recipientMessages;
     }
 
     /**
-     * @param ArrayCollection $recipientMessages
+     * @param ArrayCollection|Message[] $recipientMessages
      */
-    public function setRecipientMessages(ArrayCollection $recipientMessages): void
+    public function setRecipientMessages($recipientMessages)
     {
         $this->recipientMessages = $recipientMessages;
     }

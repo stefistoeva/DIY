@@ -20,7 +20,7 @@
                     <div class="form-group">
                         <a href="{{ path('user_mailbox') }}" class="btn btn-info btn-sm">
                             <span class="glyphicon glyphicon-envelope"></span>
-                            Message
+                            ({{ msg|length }}) Message
                         </a>
                     </div>
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
@@ -32,30 +32,45 @@
                 <fieldset>
                     <legend>My orders</legend>
 
-                    <table class="table">
+                    {% if (orders|length) %}
+                        <table class="table">
                         <tr>
                             <th>Image</th>
                             <th>Product</th>
-                            <th>Description</th>
-                            <th>Seller</th>
                             <th>Price</th>
+                            <th>Address</th>
+                            <th>Phone</th>
+                            <th>Date</th>
                         </tr>
-                        {#                        <tr>#}
-                        {#                            <td><img src="{{ asset('uploads/images/products/' ~ product.image) }}" height="60px"#}
-                        {#                                     width="90px" alt="{{ product.name }}"/></td>#}
-                        {#                            <td>{{ product.name }}</td>#}
-                        {#                            <td>{{ product.partOfDesc }}</td>#}
-                        {#                            <td>{{ product.author.fullName }}</td>#}
-                        {#                            {% if product.promotion %}#}
-                        {#                                <td>#}
-                        {#                                    <span style="text-decoration: line-through">${{ product.price }}</span>#}
-                        {#                                    <span style="color: red">${{ product.discount }}</span>#}
-                        {#                                </td>#}
-                        {#                            {% else %}#}
-                        {#                                <td>${{ product.price }}</td>#}
-                        {#                            {% endif %}#}
-                        {#                        </tr>#}
-                    </table>
+                        {% for order in orders %}
+                                <tr>
+                                    <td><img src="{{ asset('uploads/images/products/' ~ order.product.image) }}"
+                                             height="60px"
+                                             width="90px" alt="{{ order.product.name }}"/></td>
+                                    <td>{{ order.product.name }}</td>
+
+                                    {% if order.product.promotion %}
+                                        <td>
+                                            <span style="text-decoration: line-through">${{ order.product.price }}</span>
+                                            <span style="color: red">${{ order.product.discount }}</span>
+                                        </td>
+                                    {% else %}
+                                        <td>${{ order.product.price }}</td>
+                                    {% endif %}
+                                    <td>{{ order.address }}</td>
+                                    <td>{{ order.phone }}</td>
+                                    <td>{{ order.dateAdded|date("F jS \\a\\t g:ia") }}</td>
+                                </tr>
+                        {% endfor %}
+                        </table>
+                    {% else %}
+                        {% for msg in app.session.flashbag.get('no_order') %}
+                            <div class="alert alert-info" id="no_order">
+                                {{ msg }}
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+
 
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
                 </fieldset>

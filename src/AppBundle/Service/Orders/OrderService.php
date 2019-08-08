@@ -56,4 +56,19 @@ class OrderService implements OrderServiceInterface
 
         return $this->orderRepository->insert($order);
     }
+
+    public function getAllByUser()
+    {
+        return $this
+            ->orderRepository
+            ->findBy(
+                [
+                    'customer' => $this
+                        ->userService
+                        ->currentUser()
+                ],
+                [
+                    'dateAdded' => "DESC"
+                ]);
+    }
 }
