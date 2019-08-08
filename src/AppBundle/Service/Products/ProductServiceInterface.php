@@ -17,4 +17,10 @@ interface ProductServiceInterface
     public function edit(Product $product): bool ;
     public function delete(Product $product): bool ;
     public function getOneById(int $id): ?Product;
+
+    /**
+     * @param $sellerUser
+     * @return ArrayCollection|Product[]
+     */
+    public function getAllByAuthor($sellerUser);
 }

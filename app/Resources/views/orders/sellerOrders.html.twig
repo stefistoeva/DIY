@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <table class="table">
+        <tr>
+            <th>Image</th>
+            <th>Product</th>
+            <th>Price</th>
+            <th>Customer</th>
+            <th>Address</th>
+            <th>Phone</th>
+            <th>Date</th>
+        </tr>
+        {% for order in orders %}
+            <tr>
+                <td><img src="{{ asset('uploads/images/products/' ~ order.product.image) }}"
+                         height="60px"
+                         width="90px" alt="{{ order.product.name }}"/></td>
+                <td>{{ order.product.name }}</td>
+
+                {% if order.product.promotion %}
+                    <td>
+                        <span style="text-decoration: line-through">${{ order.product.price }}</span>
+                        <span style="color: red">${{ order.product.discount }}</span>
+                    </td>
+                {% else %}
+                    <td>${{ order.product.price }}</td>
+                {% endif %}
+
+                <td><a href="{{ path('user_message', {id: order.customer.id}) }}">{{ order.customer.fullName }}</a></td>
+                <td>{{ order.address }}</td>
+                <td>{{ order.phone }}</td>
+                <td>{{ order.dateAdded|date("F jS \\a\\t g:ia") }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+    <div class="pull-left">
+        <a style="margin-bottom: 5px" class="btn btn-default btn-sm" href="{{ path('all_products') }}">Back</a>
+    </div>
+
+{% endblock %}
+

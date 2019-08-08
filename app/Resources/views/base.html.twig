@@ -45,11 +45,10 @@
                     <li><a href="{{ path('diy_index') }}">Home</a></li>
                     <li><a href="{{ path('all_products') }}">Products</a></li>
                     <li><a href="{{ path('all_articles') }}">Blog</a></li>
-                    <li><a href="#">About</a></li>
                     {% if app.user %}
                         <li><a href="{{ path('user_profile') }}">My profile
                                 {% if app.user.recipientMessages|length %}
-                            <span style="color: #F76E6E;">
+                                    <span style="color: #F76E6E;">
                                 (new)
                             </span>
                                 {% endif %}

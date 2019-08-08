@@ -71,4 +71,16 @@ class OrderService implements OrderServiceInterface
                     'dateAdded' => "DESC"
                 ]);
     }
+
+    public function getAllByAuthor()
+    {
+        $user = $this->userService->currentUser();
+        return $this
+            ->orderRepository
+            ->findBy(
+                [
+                    'product' => $this->productService->getAllByAuthor($user)
+                ]
+            );
+    }
 }

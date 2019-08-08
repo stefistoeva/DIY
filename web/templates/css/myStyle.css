@@ -192,3 +192,11 @@ nav ul li a {
     display: inline-block;
     width: 80%;
 }
+
+.hr_product {
+    display: inline-block;
+    background: gray !important;
+    height: 1px !important;
+    margin: 10px auto;
+    width: 100%;
+}

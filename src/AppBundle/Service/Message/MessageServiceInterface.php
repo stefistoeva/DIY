@@ -9,7 +9,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 interface MessageServiceInterface
 {
-    public function create(Message $message, int $recipientId): bool ;
+    public function create(Message $message, int $senderId): bool ;
 
     public function getAllByUser();
 

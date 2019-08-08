@@ -21,10 +21,8 @@
     {% endfor %}
 
     {% if app.getUser() %}
-        <div class="button-added">
+        <div style="margin-bottom: 10px; margin-left: 15px;">
             <a class="btn btn-default" href="{{ path('article_create') }}"><span>&#43;</span>Add new article</a>
-        </div>
-        <div class="button-added">
             <a class="btn btn-default" href="{{ path('my_articles') }}">My articles</a>
         </div>
     {% endif %}
@@ -34,7 +32,8 @@
                 <div class="col-md-6">
                     <article style="margin-bottom: 20px">
                         <a href="{{ path('article_view', {id: article.id}) }}">
-                            <img src="{{ asset('uploads/images/articles/' ~ article.image) }}" width="400px" height="200px">
+                            <img src="{{ asset('uploads/images/articles/' ~ article.image) }}" width="400px"
+                                 height="200px">
                         </a>
                         <header>
                             <a href="{{ path('article_view', {id: article.id}) }}">

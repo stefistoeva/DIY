@@ -28,7 +28,7 @@
             let messageForm =
                 `<div class="container body-content span=8 offset=2">
         <div class="well my-style">
-            <form class="form-horizontal" action="{{ path('user_mailbox_sent_message', {id: msg.recipient.id}) }}" method="post">
+            <form class="form-horizontal" action="{{ path('user_mailbox_sent_message', {id: msg.sender.id}) }}" method="post">
                 <fieldset>
                     <legend>Add new message</legend>
                     <div class="form-group">

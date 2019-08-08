@@ -31,14 +31,15 @@ class MessageService implements MessageServiceInterface
 
     /**
      * @param Message $message
-     * @param int $recipientId
+     * @param int $senderId
      * @return bool
      * @throws ORMException
      */
-    public function create(Message $message, int $recipientId): bool
+    public function create(Message $message, int $senderId): bool
     {
         $sender = $this->userService->currentUser();
-        $recipient = $this->userService->findOneById($recipientId);
+        $recipient = $this->userService->findOneById($senderId);
+
         $message
             ->setSender($sender)
             ->setRecipient($recipient);

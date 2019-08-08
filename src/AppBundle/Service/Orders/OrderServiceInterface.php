@@ -11,4 +11,6 @@ interface OrderServiceInterface
     public function create(Order $order, int $id): bool ;
 
     public function getAllByUser();
+
+    public function getAllByAuthor();
 }

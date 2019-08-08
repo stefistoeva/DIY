@@ -1,34 +1,69 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
+    <h2>Available</h2>
+    <hr class="hr_product">
     <div class="row">
         {% for product in products %}
-            <div class="col-sm-4">
-                <div class="card">
-                    <div class="card-body">
-                        <a href="{{ path('product_view', {id: product.id}) }}">
+            {% if not(product.isDeleted) %}
+                <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <a href="{{ path('product_view', {id: product.id}) }}">
+                                <img src="{{ asset('uploads/images/products/' ~ product.image) }}"
+                                     style="margin-bottom: 10px" width="300px" height="200px" class="card-img"
+                                     alt="{{ product.name }}">
+                            </a>
+                            <h5 class="card-title">{{ product.name }}</h5>
+                            <p class="card-text">{{ product.partOfDesc }}</p>
+                            {% if product.promotion %}
+                                <h5 class="card-price"><span
+                                            style="text-decoration: line-through">${{ product.price }}</span> <span
+                                            style="color: red">${{ product.discount }}</span></h5>
+                            {% else %}
+                                <h5 class="card-price">${{ product.price }}</h5>
+                            {% endif %}
+                            <a href="{{ path('product_view', {id: product.id}) }}" class="btn btn-primary">View</a>
+                            {% if app.getUser() and app.getUser().isAdmin() %}
+                                <a class="btn btn-default" href="{{ path('product_edit', {id: product.id}) }}">Edit</a>
+                                <a class="btn btn-danger"
+                                   href="{{ path('product_delete', {id: product.id}) }}">Delete</a>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    <h2>Sold</h2>
+    <hr class="hr_product">
+    <div class="row">
+        {% for product in products %}
+            {% if product.isDeleted %}
+                <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-body">
                             <img src="{{ asset('uploads/images/products/' ~ product.image) }}"
                                  style="margin-bottom: 10px" width="300px" height="200px" class="card-img"
                                  alt="{{ product.name }}">
-                        </a>
-                        <h5 class="card-title">{{ product.name }}</h5>
-                        <p class="card-text">{{ product.partOfDesc }}</p>
-                        {% if product.promotion %}
-                            <h5 class="card-price"><span
-                                        style="text-decoration: line-through">${{ product.price }}</span> <span
-                                        style="color: red">${{ product.discount }}</span></h5>
-                        {% else %}
-                            <h5 class="card-price">${{ product.price }}</h5>
-                        {% endif %}
-                        <a href="{{ path('product_view', {id: product.id}) }}" class="btn btn-primary">View</a>
-                        {% if app.getUser() and app.getUser().isAdmin() %}
-                            <a class="btn btn-default" href="{{ path('product_edit', {id: product.id}) }}">Edit</a>
-                            <a class="btn btn-danger" href="{{ path('product_delete', {id: product.id}) }}">Delete</a>
-                        {% endif %}
+                            <h5 class="card-title">{{ product.name }}</h5>
+                            <p class="card-text">{{ product.partOfDesc }}</p>
+                            {% if product.promotion %}
+                                <h5 class="card-price"><span
+                                            style="text-decoration: line-through">${{ product.price }}</span> <span
+                                            style="color: red">${{ product.discount }}</span></h5>
+                            {% else %}
+                                <h5 class="card-price">${{ product.price }}</h5>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
-            </div>
+            {% endif %}
         {% endfor %}
+    </div>
+    <div class="pull-left">
+        <a style="margin-bottom: 5px" class="btn btn-default btn-sm" href="{{ path('all_products') }}">Back</a>
     </div>
 {% endblock %}
 

@@ -66,7 +66,9 @@ class ProductService implements ProductServiceInterface
      */
     public function delete(Product $product): bool
     {
-        return $this->productRepository->remove($product);
+        $product->setIsDeleted(1);
+
+        return $this->productRepository->update($product);
     }
 
     /**
@@ -76,5 +78,19 @@ class ProductService implements ProductServiceInterface
     public function getOneById(int $id): ?Product
     {
         return $this->productRepository->find($id);
+    }
+
+    /**
+     * @param $sellerUser
+     * @return ArrayCollection|Product[]
+     */
+    public function getAllByAuthor($sellerUser)
+    {
+        return $this
+            ->productRepository
+            ->findBy(
+                [
+                    'author' => $sellerUser
+                ]);
     }
 }

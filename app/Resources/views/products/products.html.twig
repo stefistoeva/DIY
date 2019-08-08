@@ -15,11 +15,10 @@
     {% endfor %}
 
     {% if app.getUser() and app.getUser().isAdmin() %}
-        <div class="button-added">
+        <div style="margin-bottom: 10px">
             <a class="btn btn-default" href="{{ path('product_add') }}"><span>&#43;</span>Add new gift</a>
-        </div>
-        <div class="button-added">
             <a class="btn btn-default" href="{{ path('my_products') }}">My gifts</a>
+            <a class="btn btn-default" href="{{ path('seller_orders') }}">View orders</a>
         </div>
     {% endif %}
 

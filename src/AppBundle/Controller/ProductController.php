@@ -142,12 +142,6 @@ class ProductController extends Controller
     public function deleteProcess(Request $request, int $id)
     {
         $product = $this->productService->getOneById($id);
-
-        $form = $this->createForm(ProductType::class, $product);
-
-        $form->remove('image');
-
-        $form->handleRequest($request);
         $this->productService->delete($product);
         return $this->redirectToRoute("all_products");
     }

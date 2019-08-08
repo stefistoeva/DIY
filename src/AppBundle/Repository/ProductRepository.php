@@ -55,20 +55,4 @@ class ProductRepository extends EntityRepository
             return false;
         }
     }
-
-    /**
-     * @param Product $product
-     * @return bool
-     * @throws ORMException
-     */
-    public function remove(Product $product)
-    {
-        try {
-            $this->_em->remove($product);
-            $this->_em->flush();
-            return true;
-        } catch (OptimisticLockException $e) {
-            return false;
-        }
-    }
 }
