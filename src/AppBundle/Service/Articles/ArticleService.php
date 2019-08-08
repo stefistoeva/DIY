@@ -32,7 +32,7 @@ class ArticleService implements ArticleServiceInterface
      * @param Article $article
      * @return bool
      * @throws ORMException
-     * @throws \Doctrine\ORM\ORMException
+     * @throws ORMException
      */
     public function create(Article $article): bool
     {

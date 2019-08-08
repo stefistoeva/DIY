@@ -45,6 +45,7 @@ class ProductService implements ProductServiceInterface
     {
         $author = $this->userService->currentUser();
         $product->setAuthor($author);
+        $product->setIsDeleted(0);
 
         return $this->productRepository->insert($product);
     }

@@ -6,8 +6,11 @@
         <div class="alert alert-info" id="not">
             {{ msg }}
         </div>
-        <a class="btn btn-default" href="{{ path('user_profile') }}">Back</a>
     {% endfor %}
+
+    <div class="pull-left">
+        <a style="margin-left: 35px;" class="btn btn-default btn-sm" href="{{ path('user_profile') }}">Back</a>
+    </div>
 
     {% for msg in messages %}
         <div id="fh5co-projects-feed" class="fh5co-projects-feed clearfix masonry">
