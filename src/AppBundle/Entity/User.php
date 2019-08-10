@@ -63,9 +63,9 @@ class User implements UserInterface
      *
      * @Assert\Length(
      *     min = 4,
-     *     max = 50,
-     *     minMessage="Your name must be at least {{ limit }} characters long",
-     *     maxMessage="Your name must be longer than {{ limit }} characters"
+     *     max = 20,
+     *     minMessage="Your name must be at least 4 characters long",
+     *     maxMessage="Your name must be longer than 20 characters"
      * )
      *
      * @Assert\Regex(

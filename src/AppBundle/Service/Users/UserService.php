@@ -39,8 +39,12 @@ class UserService implements UserServiceInterface
         return $this->userRepository->findOneBy(['email' => $email]);
     }
 
-    public function save(User $user): bool
+    public function save(User $user, string $email): bool
     {
+        if (null !== $this->findOneByEmail($email)){
+            return false;
+        }
+
         $passwordHash =
             $this->encryptionService->hash($user->getPassword());
         $user->setPassword($passwordHash);

@@ -45,18 +45,15 @@ class CommentController extends Controller
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 
-        $this->addFlash("comment", "Comment created successfully.");
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->addFlash("comment", "Comment created successfully.");
 
-        $this->commentService->create($comment, $id);
+            $this->commentService->create($comment, $id);
+        }
 
         return $this->redirectToRoute("article_view",
             [
                 'id' => $id
             ]);
-    }
-
-    public function addUserMessage()
-    {
-
     }
 }
