@@ -64,6 +64,7 @@ class Message
      */
     private $recipient;
 
+
     public function __construct()
     {
         $this->dateAdded = new \DateTime('now');

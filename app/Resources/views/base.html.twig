@@ -24,11 +24,7 @@
     <script src="{{ asset('templates/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('templates/js/jquery.masonry.min.js') }}"></script>
     <script src="{{ asset('templates/js/main.js') }}"></script>
-    <script>
-        setTimeout(function () {
-            $('#info').fadeOut();
-        }, 3500)
-    </script>
+    <script src="{{ asset('templates/js/myJS.js') }}"></script>
 </head>
 <body>
 {#style="background-color: #fcfcfc"#}
@@ -46,14 +42,7 @@
                     <li><a href="{{ path('all_products') }}">Products</a></li>
                     <li><a href="{{ path('all_articles') }}">Blog</a></li>
                     {% if app.user %}
-                        <li><a href="{{ path('user_profile') }}">My profile
-                                {% if app.user.recipientMessages|length %}
-                                    <span style="color: #F76E6E;">
-                                (new)
-                            </span>
-                                {% endif %}
-                            </a>
-                        </li>
+                        <li><a href="{{ path('user_profile') }}">My profile</a></li>
                         <li><a href="{{ path('security_logout') }}">Logout</a></li>
                     {% else %}
                         <li><a href="{{ path('security_login') }}">Sign In</a></li>

@@ -1,6 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block main %}
+
+    {% for msg in app.session.flashbag.get('not_article') %}
+        <div class="alert alert-info" id="not_articles">
+            {{ msg }}
+        </div>
+    {% endfor %}
+
+    <div class="pull-left">
+        <a style="margin-left: 35px;" class="btn btn-default btn-sm" href="{{ path('all_articles') }}">Back</a>
+    </div>
+
     <div class="container body-content">
         <div class="row">
             {% for article in articles %}
@@ -14,7 +25,7 @@
                         </header>
 
                         <p>
-                            {{ article.content }}
+                            {{ article.summary }}
                         </p>
 
                         <small>Views: {{ article.viewCount }}</small>

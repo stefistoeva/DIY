@@ -63,6 +63,13 @@ class UserController extends Controller
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
+
+        if (null !== $this->userService->findOneByEmail($form->getData()->getEmail())){
+         $this->addFlash('same','Email already exists!');
+        return $this->render('users/register.html.twig',
+            ['user'=>$user,'form'=>$this->createForm(UserType::class)->createView()]);
+         }
+
         $this->userService->save($user);
         $this->addFlash("info", "Register successfully!");
         return $this->redirectToRoute("security_login");

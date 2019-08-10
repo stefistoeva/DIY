@@ -95,10 +95,16 @@ class MessageController extends Controller
     public function view($id)
     {
         $message = $this->messageService->getOne($id);
+
+        if (null === $message) {
+            return $this->redirectToRoute("user_profile");
+        }
+
         $message->setIsRead(1);
         $em = $this->getDoctrine()->getManager();
         $em->persist($message);
         $em->flush();
+
         return $this->render("messages/view.html.twig",
             [
                 'msg' => $message

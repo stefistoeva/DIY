@@ -5,9 +5,6 @@
     {% for msg in app.session.flashbag.get('comment') %}
         <div class="alert alert-success" id="comment">
             {{ msg }}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
         </div>
     {% endfor %}
 
@@ -49,7 +46,7 @@
                         <div class="form-group">
                             <label class="col-sm-4 control-label" for="comment">Comment:</label>
                             <div class="col-sm-6">
-                                <textarea placeholder="Leave a comment..." class="form-control" rows="3" name="comment[content]" id="comment"></textarea>
+                                <textarea placeholder="Leave a comment..." class="form-control" rows="3" name="comment[content]" required id="comment"></textarea>
                                 <small>User: {{ app.getUser().getFullName() }}</small>
                             </div>
                         </div>

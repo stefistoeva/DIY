@@ -14,7 +14,7 @@
         </div>
     {% endfor %}
 
-    {% if app.getUser() and app.getUser().isAdmin() %}
+    {% if app.getUser() and (app.getUser().isAdmin()) %}
         <div style="margin-bottom: 10px">
             <a class="btn btn-default" href="{{ path('product_add') }}"><span>&#43;</span>Add new gift</a>
             <a class="btn btn-default" href="{{ path('my_products') }}">My gifts</a>

@@ -3,7 +3,7 @@
 {% block main %}
 
     {% for msg in app.session.flashbag.get('not') %}
-        <div class="alert alert-info" id="not">
+        <div class="alert alert-info" id="not_message">
             {{ msg }}
         </div>
     {% endfor %}

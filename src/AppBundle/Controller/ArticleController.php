@@ -69,7 +69,7 @@ class ArticleController extends Controller
 
         $this->articleService->create($article);
 
-        $this->addFlash("info", "Create article successfully!");
+        $this->addFlash("success", "Create article successfully!");
         return $this->redirectToRoute("all_articles");
     }
 
@@ -237,6 +237,10 @@ class ArticleController extends Controller
             ->getDoctrine()
             ->getRepository(Article::class)
             ->findBy(['author' => $this->getUser()], ['dateAdded' => "DESC"]);
+
+        if (empty($articles)) {
+            $this->addFlash("not_article", "You doesn't have any articles!");
+        }
 
         return $this->render(
             "articles/myArticles.html.twig",

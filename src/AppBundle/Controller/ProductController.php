@@ -63,7 +63,6 @@ class ProductController extends Controller
         $form = $this->createForm(ProductType::class, $product);
         $form->handleRequest($request);
         $this->fileUpload($form, $product);
-
         $this->productService->create($product);
         $this->addFlash("gift", "Add gift successfully!");
 
@@ -107,7 +106,10 @@ class ProductController extends Controller
         $this->fileUpload($form, $product);
         $this->productService->edit($product);
 
-        return $this->redirectToRoute("product_view", [$id]);
+        return $this->redirectToRoute("product_view",
+            [
+                'id' => $id
+            ]);
     }
 
 
@@ -242,6 +244,7 @@ class ProductController extends Controller
     {
         /** @var UploadedFile $file */
         $file = $form['image']->getData();
+
         $fileName = md5(uniqid()) . '.' . $file->guessExtension();
 
         if ($file) {

@@ -7,6 +7,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Mapping;
 use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
 
 /**
  * UserRepository
@@ -23,8 +24,14 @@ class UserRepository extends EntityRepository
             new Mapping\ClassMetadata(User::class) : $metaData);
     }
 
+    /**
+     * @param User $user
+     * @return bool
+     * @throws ORMException
+     */
     public function insert(User $user)
     {
+//        if ($user->ge/tEmail())
         try {
             $this->_em->persist($user);
             $this->_em->flush();
