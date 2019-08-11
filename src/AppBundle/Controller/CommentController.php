@@ -45,7 +45,7 @@ class CommentController extends Controller
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()) {
             $this->addFlash("comment", "Comment created successfully.");
 
             $this->commentService->create($comment, $id);

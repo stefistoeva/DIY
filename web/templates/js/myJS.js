@@ -11,4 +11,5 @@ setTimeout(function () {
     $('#success').fadeOut();
     $('#defect').fadeOut();
     $('#mistake').fadeOut();
+    $('#edit_profile').fadeOut();
 }, 4000);

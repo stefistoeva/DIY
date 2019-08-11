@@ -121,6 +121,7 @@ class UserController extends Controller
             return $this->redirectToRoute('user_edit');
         }
 
+        $this->addFlash("edit_profile", "Edit profile successfully!");
         $this->userService->edit($user);
 
         return $this->redirectToRoute("user_profile");

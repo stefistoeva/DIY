@@ -45,11 +45,11 @@
         </div>
     </div>
     {% if app.getUser() %}
-        <div id="message"></div>
+        <div id="message_show"></div>
     {% endif %}
     <script>
         $('#add').click(function () {
-            $('#message').empty();
+            $('#message_show').empty();
             $('#fh5co-footer').hide();
 
             let messageForm =
@@ -79,8 +79,8 @@
         </div>
     </div>`;
 
-            $('#message').append(messageForm);
-            $('#message').toggle();
+            $('#message_show').append(messageForm);
+            $('#message_show').toggle();
         });
     </script>
 

@@ -61,7 +61,7 @@ class MessageController extends Controller
         $form = $this->createForm(MessageType::class, $message);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted()) {
             $this->messageService->create($message, $id);
             $this->addFlash("message", "Message sent successfully!");
         }

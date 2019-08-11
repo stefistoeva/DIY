@@ -18,11 +18,11 @@
                 <a class="btn btn-primary" id="add">Add message</a>
             </div>
         </div>
-        <div id="message"></div>
+        <div id="message_view"></div>
     {% endif %}
     <script>
         $('#add').click(function () {
-            $('#message').empty();
+            $('#message_view').empty();
             $('#fh5co-footer').hide();
 
             let messageForm =
@@ -52,8 +52,8 @@
         </div>
     </div>`;
 
-            $('#message').append(messageForm);
-            $('#message').toggle();
+            $('#message_view').append(messageForm);
+            $('#message_view').toggle();
         });
     </script>
 {% endblock %}

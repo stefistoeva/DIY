@@ -3,6 +3,13 @@
 {% block body_id 'login' %}
 
 {% block main %}
+
+    {% for msg in app.session.flashbag.get('edit_profile') %}
+        <div class="alert alert-success" id="edit_profile">
+            {{ msg }}
+        </div>
+    {% endfor %}
+
     <div class="container body-content span=8 offset=2">
         <div class="well profile_style">
             <form name="authenticate" class="form-horizontal" action="{{ path('security_login') }}" method="post">
