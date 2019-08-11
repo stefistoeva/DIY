@@ -31,9 +31,24 @@ class UserRepository extends EntityRepository
      */
     public function insert(User $user)
     {
-//        if ($user->ge/tEmail())
         try {
             $this->_em->persist($user);
+            $this->_em->flush();
+            return true;
+        } catch (OptimisticLockException $e) {
+            return false;
+        }
+    }
+
+    /**
+     * @param User $product
+     * @return bool
+     * @throws ORMException
+     */
+    public function update(User $product)
+    {
+        try {
+            $this->_em->merge($product);
             $this->_em->flush();
             return true;
         } catch (OptimisticLockException $e) {

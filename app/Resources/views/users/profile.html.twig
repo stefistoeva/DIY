@@ -23,6 +23,7 @@
                             ({{ msg|length }}) Message
                         </a>
                     </div>
+                    <a href="{{ path('user_edit') }}" class="btn btn-success btn-sm">Edit</a>
                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
                 </fieldset>
             </form>

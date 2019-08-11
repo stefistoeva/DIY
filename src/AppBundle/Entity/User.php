@@ -71,7 +71,7 @@ class User implements UserInterface
      * @Assert\Regex(
      *     pattern="/^[A-z]+$/",
      *     match=true,
-     *     message="Your name should contain only letters."
+     *     message="Your name should contain only letters!"
      * )
      *
      * @var string

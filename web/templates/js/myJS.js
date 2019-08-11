@@ -9,5 +9,6 @@ setTimeout(function () {
     $('#comment').fadeOut();
     $('#problem').fadeOut();
     $('#success').fadeOut();
-    $('#same').fadeOut();
-}, 3000);
+    $('#defect').fadeOut();
+    $('#mistake').fadeOut();
+}, 4000);

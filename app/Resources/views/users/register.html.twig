@@ -4,8 +4,8 @@
 
 {% block main %}
 
-    {% for msg in app.session.flashbag.get('same') %}
-        <div class="alert alert-danger" id="same">
+    {% for msg in app.session.flashbag.get('defect') %}
+        <div class="alert alert-danger" id="defect">
             {{ msg }}
         </div>
     {% endfor %}

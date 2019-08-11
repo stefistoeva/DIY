@@ -10,6 +10,7 @@ use AppBundle\Service\Orders\OrderServiceInterface;
 use AppBundle\Service\Products\ProductServiceInterface;
 use AppBundle\Service\Users\UserServiceInterface;
 use Exception;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -64,20 +65,70 @@ class UserController extends Controller
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
-        $email = $form->getData()->getEmail();
-
-        if (!$this->userService->save($user, $email)) {
-            $this->addFlash('same', 'Email already exists!');
-            return $this->render('users/register.html.twig', ['user' => $user, 'form' => $this->createForm(UserType::class)->createView()]);
+        try {
+            $this->userService->validateLength($form);
+            $this->userService->validatePasswords($form);
+            $this->userService->isUniqueEmail($form);
+        } catch (\Exception $ex) {
+            $this->addFlash("defect", $ex->getMessage());
+            return $this->redirectToRoute('user_register');
         }
 
-        $this->userService->save($user, $email);
-        $this->addFlash("info", "Register successfully!");
-        return $this->redirectToRoute("security_login");
+        if ($form->isSubmitted()) {
+            $this->userService->save($user);
+            $this->addFlash("info", "Register successfully!");
+            return $this->redirectToRoute("security_login");
+        }
+
+        return $this->redirectToRoute("user_register");
+    }
+
+    /**
+     * @Route("/edit", name="user_edit", methods={"GET"})
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     * @return Response
+     */
+    public function edit()
+    {
+        $currentUser = $this->userService->currentUser();
+
+        return $this->render('users/edit.html.twig',
+            [
+                'form' => $this->createForm(UserType::class)->createView(),
+                'user' => $currentUser
+            ]);
+    }
+
+    /**
+     * @Route("/edit", methods={"POST"})
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
+     * @param Request $request
+     * @param $id
+     * @return Response
+     */
+    public function editProcess(Request $request)
+    {
+        $user = $this->userService->currentUser();
+        $form = $this->createForm(UserType::class, $user);
+        $form->remove('password');
+        $form->handleRequest($request);
+
+        try {
+            $this->userService->validateLength($form);
+            $this->userService->isUniqueEmail($form, $user->getEmail());
+        } catch (\Exception $ex) {
+            $this->addFlash("mistake", $ex->getMessage());
+            return $this->redirectToRoute('user_edit');
+        }
+
+        $this->userService->edit($user);
+
+        return $this->redirectToRoute("user_profile");
     }
 
     /**
      * @Route("/profile", name="user_profile")
+     * @Security("is_granted('IS_AUTHENTICATED_FULLY')")
      */
     public function profile()
     {
